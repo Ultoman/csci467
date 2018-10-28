@@ -1,4 +1,5 @@
 This is the GEM system for csci467
+Contributers: James Bonasera, Jackie Salim
 
 Assign 3:
 You	will	create	low-fidelity (hand-sketches) user	interface	designs for	input	screens and	an	

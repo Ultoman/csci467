@@ -1,4 +1,5 @@
 This is the GEM system for csci467
+
 Contributers: James Bonasera, Jackie Salim
 
 Assign 3:
@@ -22,6 +23,7 @@ designing	for	the	primary	actors	of	the	use	cases.
 5. Create	New	Vendor
 6. Create	New	Event	(required)
 7. Approve	Event	(required)
+
 Part	2.		Low-Fidelity	Report Designs (20	points	each;	40	points	total)
 Hand-sketch	user	interface	designs	of	both	of	the	following	use	cases	for	the	associated	primary	
 actors.

@@ -13,8 +13,7 @@
 echo '<p style="padding-left:100; padding-right:100" align="center">';
    echo 'Welcome to the GEM System!';
    echo '<br/>';
-   echo 'This sytem allows you to<br/>';
-   echo 'Create a New Agent, Create a New Event, Create a New Vendor, Approve Events, and Create Reports amongst other things.';
+   echo 'IN CONSTRUCTION - USES PAST DATABASE PROJECT CODE WITH BOATS';
    echo '<br/>Click any of the links above to see these features!';
 echo '</p>';
 

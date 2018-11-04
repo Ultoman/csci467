@@ -5,54 +5,13 @@
 
   $pageTitle = "Boat Service Information";
 
-  include("header.html");
+  include("header.php");
   require_once("conn.php");
 
   echo 'Select a Boat:<br>';
   //create form
-  echo '<form action="createVendor.php" method="post">';
+  echo '<form action="page3.php" method="post">';
 
- echo '<div>';
- echo '<div style="padding: 10px; border: 2px solid gray; float: left; width: 30%">';
-  echo '<table>';
-   // Row 1
-   echo '<tr align="right">';
-     echo '<td>';
-     echo '<h1>Vendor</h1>';
-     echo '</td>';
-   echo '</tr>';
-  echo '</table>';
- echo '</div>';
-
- echo '<div style="padding: 10px; border: 2px solid gray; float: left; width: 30%; margin-left: 23px">';
-  echo '<table>';
-   // Row 1
-   echo '<tr align="right">';
-     echo '<td>';
-     echo '<h1>Address</h1>';
-     echo '</td>';
-   echo '</tr>';
-  echo '</table>';
- echo '</div>';
-
- echo '<div style="padding: 10px; border: 2px solid gray; float: right; width: 30%">';
-  echo '<table>';
-   // Row 1
-   echo '<tr align="right">';
-     echo '<td>';
-     echo '<h1>Vendor</h1>';
-     echo '</td>';
-   echo '</tr>';
-  echo '</table>';
- echo '</div>';
-
- echo '<div class="clear"></div>';
-
- echo '</div>';
-
-echo '<br><br>';
-
-/*
   //create the drop down maneu
   echo '<select name="boatnames">';
   echo '<option value="empty">-- select a boat --</option>';
@@ -105,7 +64,7 @@ echo '<br><br>';
    }//end else
 
   }//end if
-*/
+
   include("footer.html");
 
 ?>

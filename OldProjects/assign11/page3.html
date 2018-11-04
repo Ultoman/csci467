@@ -1,0 +1,124 @@
+<!--
+Jackie Salim z1761458
+
+Purpose: This file controls the layout of the update service request screen.
+	 Code utilized - from group project
+-->
+<body>
+  Select a Service Request:<br>
+
+  <form id="requestForm" action="extra.php" method="post">
+
+  <select name="selectRequest" id="selectRequest" onchange="currentSelect()"><br>
+    <?php echo $request->ServiceID == "" ? "" : '<option>'.$request->ServiceID.". ".$request->BoatName."- ".$request->Description.'</option>'; ?>
+    <option>-- Select a Service Request --</option>
+    <?php echo $serviceRequestSelect ?>
+  </select><br><br>
+ 
+  <table id="infoTable" style="<?php echo $tableVisibility; ?>">
+  <tr>
+    <td>
+      Service ID:
+    </td>
+    <td>
+      <input type="text" id="serviceID" name="serviceID" style="border:none; border-color:transparent" value=<?php echo '"'.$request->ServiceID.'"' ?> readonly>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Slip ID:
+    </td>
+    <td>
+      <input type="text" id="slipID" name="slipID" style="border:none; border-color:transparent" value=<?php echo '"'.$request->SlipID.'"' ?> readonly>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Category Number:
+    </td>
+    <td>
+      <input type="text" id="categoryNum" name="categoryNum" style="border:none; border-color:transparent" value=<?php echo '"'.$request->CategoryNum.'"' ?> readonly>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Description:
+    </td>
+    <td>
+      <input type="text" id="description" name="description" value=<?php echo '"'.$request->Description.'"' ?>>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Status:
+    </td>
+    <td>
+      <input type="text" id="status" name="status" style="border:none; border-color:transparent" value=<?php echo '"'.$request->Status.'"' ?> readonly>
+    </td>
+  </tr> 
+
+  <tr>
+    <td>
+      Estimated Hours:
+    </td>
+    <td>
+      <input type="text" id="estHours" name="estHours" style="border:none; border-color:transparent" value=<?php echo '"'.$request->EstHours.'"' ?> readonly>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Hours Spent:
+    </td>
+    <td>
+      <input type="text" id="spentHours" name="spentHours" style="border:none; border-color:transparent" value=<?php echo '"'.$request->SpentHours.'"' ?> readonly>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Next Service Date:
+    </td>
+    <td>
+      <input type="date" id="nextDate" name="nextDate" value=<?php echo '"'.$request->NextServiceDate.'"' ?>>
+    </td>
+  </tr>
+  </table><br>
+
+
+
+  <input type="button" name="submits" value="Update" onclick="validate()">
+
+  <input type="hidden" name="selected" id="selected" value="0"></input>
+  <input type="hidden" name="submitted" id="submitted" value="0"></input>
+
+  </form>
+
+
+  <script>
+  function currentSelect(){
+
+     if(document.getElementById("selectRequest").value == "-- Select a Service Request --"){
+        document.getElementById("selected").value = "0";
+     }
+     else{
+        document.getElementById("selected").value = "1";
+     }
+
+     document.getElementById('requestForm').submit();
+  }
+
+  function validate(){
+   document.getElementById('submitted').value = "1";
+   document.getElementById('requestForm').submit();
+ 
+  }
+
+
+  </script>
+
+</body>

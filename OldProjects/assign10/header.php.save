@@ -1,0 +1,9 @@
+<?php
+echo "<html>";
+echo "<head>";
+	echo"<title>".$pageTitle."</title>";
+	echo"<h1 align="echo "</head>";
+
+echo "<body>";
+
+?>

@@ -17,10 +17,10 @@
   echo '<form action="createVendor.php" method="post">';
 
  //OUTER DIV
- echo '<div>';
+ echo '<div style="display: flex; justify-content: space-between">';
 
  //VENDOR div and table
- echo '<div style="padding: 10px; border: 2px solid grey; float: left; width: 30%">';
+ echo '<div style="border: 2px solid #333333; width: 30%; height: 33.33%">';
   echo '<table>';
    // Row 1
    echo '<tr>';
@@ -63,7 +63,7 @@
  echo '</div>';
 
  //ADDRESS div and table
- echo '<div style="padding: 10px; border: 2px solid gray; float: left; width: 30%; margin-left: 30px">';
+ echo '<div style="border: 2px solid #333333; width: 30%; height: 33.33%">';
   echo '<table>';
    // Row 1
    echo '<tr align="center">';
@@ -148,7 +148,7 @@
  echo '</div>';
 
  //CONTACT div and table
- echo '<div style="padding: 10px; border: 2px solid gray; float: right; width: 30%">';
+ echo '<div style="border: 2px solid #333333; width: 30%; height: 33.33%">';
   echo '<table>';
    // Row 1
    echo '<tr align="center">';

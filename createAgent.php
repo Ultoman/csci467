@@ -5,11 +5,14 @@
 //in a table. It displays the owner's name, Marina name, and Slip number of the boat.
 
   $pageTitle = "Create Agent";
+  $border = "style=\"border: 1px grey solid; border-radius: 4px\"";
 
   include("header.html");
   require_once("conn.php");
   //echo $pageTitle;
- echo '<br>';
+
+ echo '<br>Agent ID: ';
+ echo '<input type="text" name="agentID" value=01 style="width: 50px; text-align: center; background-color: #F9F6F6; color: grey" readonly><br><br>';
 
  echo '<form action="createAgent.php" method="post">';
 
@@ -42,14 +45,15 @@
     // Column 2
     echo '<td align="left" style="border-right: 1px solid grey; border-top: 1px solid grey; border-bottom: 1px solid grey">';
     echo '<br>';
-    echo '<select style="width: 174px">';
-    echo '<option value="forArtist">For Artist</option>';
-    echo '<option value="forBand">For Band</option>';
-    echo '<option value="other">Other</option>';
+    echo '<select name="agentType" style="width: 174px">';
+    echo '<option value="For Artist">For Artist</option>';
+    echo '<option value="For Band">For Band</option>';
+    echo '<option value="Other">Other</option>';
     echo '</select><br><br>';
-    echo '<input type="text" name="fname"><br><br>';
-    echo '<input type="text" name="minit"><br><br>';
-    echo '<input type="text" name="lname">';
+//    echo '<input type="text" name="fname" placeholder="Jane" maxLength="25"'.$border.'><br><br>';
+    echo '<input type="text" name="fname" placeholder="Jane" maxLength="25"><br><br>';
+    echo '<input type="text" name="minit" placeholder="G" maxLength="1"><br><br>';
+    echo '<input type="text" name="lname" placeholder="Doe" maxLength="25">';
     echo '<br><br>';
     echo '</td>';
     // Column 3
@@ -61,9 +65,9 @@
     echo '</td>';
     // Column 4
     echo '<td align="left" style="border-right: 1px solid grey; border-top: 1px solid grey; border-bottom: 1px solid grey">';
-    echo '<input type="text" name="street"><br><br>';
-    echo '<input type="text" name="city"><br><br>';
-    echo '<select style="width: 174px">';
+    echo '<input type="text" name="street" placeholder="123 W Broadway Dr" maxLength="50"><br><br>';
+    echo '<input type="text" name="city" placeholder="City" maxLength="20"><br><br>';
+    echo '<select name="state" style="width: 174px">';
     echo '<option value="AL">Alabama</option>';
     echo '<option value="AK">Alaska</option>';
     echo '<option value="AZ">Arizona</option>';
@@ -116,7 +120,7 @@
     echo '<option value="WI">Wisconsin</option>';
     echo '<option value="WY">Wyoming</option>';
     echo '</select><br><br>';
-    echo '<input type="text" name="zip">';
+    echo '<input type="text" name="zip" placeholder="12345"  maxLength="10">';
     echo '</td>';
     // Column 5
     echo '<td align="right" style="border-left: 1px solid grey; border-top: 1px solid grey; border-bottom: 1px solid grey">';
@@ -126,9 +130,9 @@
     echo '</td>';
     // Column 6
     echo '<td align="left" style="border-right: 1px solid grey; border-top: 1px solid grey; border-bottom: 1px solid grey">';
-    echo '<input type="text" name="email"><br><br>';
-    echo '<input type="text" name="cellPhone"><br><br>';
-    echo '<input type="text" name="officePhone">';
+    echo '<input type="text" name="email" placeholder="example@email.com" maxLength="30"><br><br>';
+    echo '<input type="text" name="cellPhone" placeholder="8151231000" maxLength="10"><br><br>';
+    echo '<input type="text" name="officePhone" placeholder="8151231000"  maxLength="10">';
     echo '</td>';
   echo '</tr>';
  echo '</table>';
@@ -183,6 +187,58 @@
    echo '</tr>';
   }
 */
+
+  //handles button action
+  if ($_SERVER['REQUEST_METHOD'] == 'POST')
+  {
+    /*$firstname = $_POST['fName'];
+    $lastname = $_POST['lName'];
+    $sql = "insert into Owner (FirstName, LastName) values (?, ?)";
+    try{
+      $stmt = $conn->prepare($sql);
+      $stmt->execute(array($firstname, $lastname));
+    }
+    catch(PDOException $e){
+       $message = $e->getMessage();
+       echo "<script type='text/javascript'>alert('$message');</script>";
+    }*/
+    $firstname = $_POST['fname'];
+    $middle = $_POST['minit'];
+    $lastname = $_POST['lname'];
+    $street = $_POST['street'];
+    $city = $_POST['city'];
+    $state = $_POST['state'];
+    $zip = $_POST['zip'];
+    $email = $_POST['email'];
+    $cellPhone = $_POST['cellPhone'];
+    $officePhone = $_POST['officePhone'];
+    $agentType = $_POST['agentType'];
+
+    if (empty($firstname) || empty($middle) || empty($lastname) || empty($street) || empty($city) || empty($state)|| empty($zip)|| empty($email)|| empty($officePhone)|| empty($cellPhone)) {
+     $border = "style=\"border: 1px red solid; border-radius: 4px\"";
+     echo "<script type='text/javascript'>alert('ERROR: All Fields Required\\n\\nPlease fill out all fields');</script>";
+    }
+    else if (!is_numeric($zip) || !is_numeric($officePhone) || !is_numeric($cellPhone)){
+     echo "<script type='text/javascript'>alert('ERROR: Non numeric found in numeric fields\\n\\nPhone numbers and Zip code must be numbers only');</script>";
+    }
+    else {
+     //Not Empty
+     $sql = "insert into Agent (FirstName,MiddleInit,LastName,Street,City,State,Zip,Email,OfficeNum,CellNum,Type) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+     try{
+       $stmt = $conn->prepare($sql);
+       $stmt->execute(array($firstname, $middle, $lastname, $street, $city, $state, $zip, $email, $officePhone, $cellPhone, $agentType));
+     }
+     catch(PDOException $e){
+        $message = $e->getMessage();
+        echo "<script type='text/javascript'>alert('$message');</script>";
+     }
+
+     $msg = "$firstname $middle. $lastname was added";
+ //    echo "<script type='text/javascript'>alert('$firstname $lastname was addeded.\n\nAddress:\n$street $city , $state $zip\n\nContact:\nemail: $email\ncell: $cellPhone\noffice: $officePhone\n\nAgent Type: $agentType');</script>";
+     echo "<script type='text/javascript'>alert('$msg');</script>";
+    }
+  }
+
   include("footer.html");
 
 ?>

@@ -18,9 +18,9 @@ Agent id should be an auto-increment primary key.*/
 
 CREATE TABLE Agent
 (AgentId int auto_increment PRIMARY KEY,
-FirstName CHAR(20),
+FirstName CHAR(25),
 MiddleInit CHAR(1),
-LastName CHAR(20),
+LastName CHAR(25),
 Street CHAR(50),
 City CHAR(20),
 State CHAR(2),
@@ -107,8 +107,8 @@ City CHAR(20),
 State CHAR(2),
 Zip CHAR(10),
 Type CHAR(15),
-RepFirstName CHAR(20),
-RepLastName CHAR(20),
+RepFirstName CHAR(25),
+RepLastName CHAR(25),
 RepEmail CHAR(40),
 RepCellNum CHAR(10));
 

@@ -18,8 +18,8 @@
   echo '<div style=" border: 2px solid gray; float: left; width: 49%">';
 
    echo '<div style="float:left; margin-right:20px; padding: 10px">';
-    echo '<label for="name" style="display: block">Name</label>';
-    echo '<input id="name" type="text" value="" name="name" style="display: block">';
+    echo '<label for="name" style="display: block">Event Name</label>';
+    echo '<input id="name" type="text" value="" name="name" size="50" style="display: block">';
    echo '</div>';
 
    echo '<div style="float:left; margin-right:20px; padding: 10px;">';

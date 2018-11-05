@@ -4,14 +4,11 @@
 //If no service has been done, an appropriate message is displayed.
 
   $pageTitle = "Create New Vendor";
-
+  include("main.css");
   include("header.html");
   require_once("conn.php");
-
-  echo '<h1>'.$pageTitle.'</h1>';
-
-//  echo 'Vendor ID: ';
-//  echo '<input type="text" name="vendorID" value=01 style="width: 50px; text-align: center; background-color: #F9F6F6; color: grey" readonly><br><br>';
+  $border = "style=\"border: 1px grey solid; border-radius: 4px\"";
+  echo '<h1 align="center">'.$pageTitle.'</h1>';
 
   //create form
   echo '<form action="createVendor.php" method="post">';
@@ -21,24 +18,20 @@
 
  //VENDOR div and table
  echo '<div style="border: 2px solid #333333; width: 30%; height: 33.33%">';
-  echo '<table>';
-   // Row 1
-   echo '<tr>';
-     echo '<td colspan="2" align="center">';
-     echo '<h2>Vendor</h2>';
-     echo '</td>';
-   echo '</tr>';
+  echo '<table class="input-table">';
+   // Header
+   echo '<h1 align="center">Vendor</h1>';
    //Row 2
    echo '<tr>';
     // Column 1
-    echo '<td align="right" style="padding-left: 20px">';
+    echo '<td align="right" width="50%">';
     echo 'Vendor Type :<br><br>';
     echo 'Business Name :<br><br>';
     echo 'Representative First Name :<br><br>';
     echo 'Representative Last Name :<br><br>';
     echo '</td>';
      // Column 2
-    echo '<td align="left">';
+    echo '<td align="left" width="50%">';
     echo '<br>';
     echo '<select name="vendorType" style="width: 174px">';
     echo '<option value="concertHall">Concert Hall</option>';
@@ -64,17 +57,13 @@
 
  //ADDRESS div and table
  echo '<div style="border: 2px solid #333333; width: 30%; height: 33.33%">';
-  echo '<table>';
+  echo '<table class="input-table">';
    // Row 1
-   echo '<tr align="center">';
-     echo '<td colspan="2">';
-     echo '<h2>Address</h2>';
-     echo '</td>';
-   echo '</tr>';
+   echo '<h1 align="center">Address</h1>';
    //Row 2
    echo '<tr>';
     // Column 1
-    echo '<td align="right" style="padding-left: 90px">';
+    echo '<td align="right" width="50%">';
     echo '<br>';
     echo 'Street :<br><br>';
     echo 'City :<br><br>';
@@ -83,7 +72,7 @@
     echo '<br><br>';
     echo '</td>';
     // Column 4
-    echo '<td align="left">';
+    echo '<td align="left" width="50%">';
     echo '<br>';
     echo '<input type="text" name="street" placeholder="123 Broadway Dr" maxLength="50"><br><br>';
     echo '<input type="text" name="city" placeholder="City" maxLength="20"><br><br>';
@@ -149,17 +138,13 @@
 
  //CONTACT div and table
  echo '<div style="border: 2px solid #333333; width: 30%; height: 33.33%">';
-  echo '<table>';
+  echo '<table class="input-table">';
    // Row 1
-   echo '<tr align="center">';
-     echo '<td colspan="2">';
-     echo '<h2>Contact</h2>';
-     echo '</td>';
-   echo '</tr>';
+   echo '<h1 align="center">Contact</h1>';
    // Row 2
    echo '<tr>';
       // Column 1
-    echo '<td align="right" style="padding-left: 90px">';
+    echo '<td align="right" width="50%">';
     echo '<br><br>';
     echo 'Email :<br><br>';
     echo 'Phone :<br><br>';
@@ -167,7 +152,7 @@
 
     echo '</td>';
     // Column 2
-    echo '<td align="left">';
+    echo '<td align="left" width="50%">';
     echo '<br><br>';
     echo '<input type="text" name="email" placeholder="example@email.com" maxLength="40"><br><br>';
     echo '<input type="text" name="phone" placeholder="8151231000" maxLength="10"><br><br>';
@@ -180,72 +165,12 @@
 
  echo '</div>'; //end main div
 
-  echo '<div align="center">';
-   echo '<table width="100%" style="padding-top: 20px">';
-    echo '<tr><td align="center">';
-    echo '<button type="reset" class="button button1">Clear</button>';
-    echo '  ';
-    echo '<button type="submit" class="button button1">Create</button>';
-   echo '</td></tr>';
-   echo '</table>';
+  echo '<div style="padding: 2em;" align="center">';
+    echo '<button type="reset" class="button button1" style="margin: 0 2em">Clear</button>';
+    echo '<button type="submit" class="button button1" style="margin: 0 2em">Create</button>';
   echo '</div>';
 
 echo '</form>';
-
-/*
-  //create the drop down maneu
-  echo '<select name="boatnames">';
-  echo '<option value="empty">-- select a boat --</option>';
-
-  //populate drop down with database info
-  foreach($conn->query('SELECT BoatName FROM MarinaSlip') as $boatname)
-  {
-   echo '<option value="'.$boatname['BoatName'].'">'.$boatname['BoatName'].'</option>';
-  }
-  echo '</select>';
-
-  echo '<br><br>';
-  echo '<input type="submit" name="submit" value="Show">';
-  echo '&nbsp&nbsp&nbsp';
-  echo '<input type="reset" name="reset">';
-
-  echo '</form>';
-
-   //handles button action
-  if ($_SERVER['REQUEST_METHOD'] == 'POST')
-  {
-   $nameboat = $_POST['boatnames'];
-   $sql = "select CategoryDescription from MarinaSlip,ServiceCategory,ServiceRequest where MarinaSlip.BoatName = '$nameboat' and ServiceRequest.SlipId = MarinaSlip.SlipId and ServiceCategory.CategoryNum = ServiceRequest.CategoryNum";
-
-   echo 'Service done on '.$nameboat.':<br><br>';
-
-
-   $q = $conn->query($sql);
-   $cnt = $q->rowCount();
-
-   if($cnt == 0)
-   {
-    echo '--No service has been done--';
-   }
-   else
-   {
-     echo '<table border=1>';
-
-
-     while($row=$q->fetch(PDO::FETCH_ASSOC))
-     {
-      echo '<tr>';
-        echo '<td style="padding: 0px 5px 0px 5px;">';
-          echo $row['CategoryDescription'];
-        echo '</td>';
-      echo '</tr>';
-     }//end while
-
-     echo '</table>';
-   }//end else
-
-  }//end if
-*/
 
  //handles button action
   if ($_SERVER['REQUEST_METHOD'] == 'POST')

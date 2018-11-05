@@ -6,67 +6,64 @@
 
   $pageTitle = "Create New Agent";
   $border = "style=\"border: 1px grey solid; border-radius: 4px\"";
-
+  include("main.css");
   include("header.html");
   require_once("conn.php");
   //echo $pageTitle;
 
- echo '<h1>'.$pageTitle.'</h1>';
-
- echo 'Agent ID: ';
- echo '<input type="text" name="agentID" value=01 style="width: 50px; text-align: center; background-color: #F9F6F6; color: grey" readonly><br><br>';
+ echo '<h1 align="center">'.$pageTitle.'</h1>';
 
  echo '<form action="createAgent.php" method="post">';
 
- echo '<table width="100%">';
+ // OUTER DIV
+ echo '<div style="display: flex; justify-content: space-between">';
+
+ // AGENT INFO DIV
+ echo '<div style="border: 2px solid #333333; width: 30%; height: 33.33%">';
+ echo '<table class="input-table">';
+  // Header
+    echo '<h1 align="center">Agent Info</h1>';
   // Row 1
-  echo '<tr align="right">';
-    echo '<td>';
-    echo '<h2>Agent Info</h2>';
-    echo '</td>';
-    echo '<td>';
-    echo '</td>';
-    echo '<td>';
-    echo '<h2>Address</h2>';
-    echo '</td>';
-    echo '<td>';
-    echo '</td>';
-    echo '<td>';
-    echo '<h2>Contact</h2>';
-    echo '</td>';
-  echo '</tr>';
-  // Row 2
   echo '<tr>';
     // Column 1
-    echo '<td align="right" style="border-left: 1px solid grey; border-top: 1px solid grey; border-bottom: 1px solid grey">';
+    echo '<td align="right" width="50%">';
     echo 'Agent Type :<br><br>';
     echo 'First Name :<br><br>';
     echo 'Middle Initial :<br><br>';
     echo 'Last Name :';
     echo '</td>';
     // Column 2
-    echo '<td align="left" style="border-right: 1px solid grey; border-top: 1px solid grey; border-bottom: 1px solid grey">';
+    echo '<td align="left" width="50%">';
     echo '<br>';
     echo '<select name="agentType" style="width: 174px">';
     echo '<option value="For Artist">For Artist</option>';
     echo '<option value="For Band">For Band</option>';
     echo '<option value="Other">Other</option>';
     echo '</select><br><br>';
-//    echo '<input type="text" name="fname" placeholder="Jane" maxLength="25"'.$border.'><br><br>';
     echo '<input type="text" name="fname" placeholder="Jane" maxLength="25"><br><br>';
     echo '<input type="text" name="minit" placeholder="G" maxLength="1"><br><br>';
     echo '<input type="text" name="lname" placeholder="Doe" maxLength="25">';
     echo '<br><br>';
     echo '</td>';
-    // Column 3
-    echo '<td align="right" style="border-left: 1px solid grey; border-top: 1px solid grey; border-bottom: 1px solid grey">';
+  echo '</tr>';
+ echo '</table>';
+ echo '</div>'; // End of Agent Info div
+    // Address DIV
+ echo '<div style="border: 2px solid #333333; width: 30%; height: 33.33%">';
+ echo '<table class="input-table">';
+  // Header
+    echo '<h1 align="center">Address</h1>';
+  // Row 1
+  echo '<tr>';
+    // Column 1
+    echo '<td align="right" width="50%">';
     echo 'Street :<br><br>';
     echo 'City :<br><br>';
     echo 'State :<br><br>';
     echo 'ZIP :';
     echo '</td>';
-    // Column 4
-    echo '<td align="left" style="border-right: 1px solid grey; border-top: 1px solid grey; border-bottom: 1px solid grey">';
+    // Column 2
+    echo '<td align="left" width="50%">';
     echo '<input type="text" name="street" placeholder="123 W Broadway Dr" maxLength="50"><br><br>';
     echo '<input type="text" name="city" placeholder="City" maxLength="20"><br><br>';
     echo '<select name="state" style="width: 174px">';
@@ -124,87 +121,44 @@
     echo '</select><br><br>';
     echo '<input type="text" name="zip" placeholder="12345"  maxLength="10">';
     echo '</td>';
-    // Column 5
-    echo '<td align="right" style="border-left: 1px solid grey; border-top: 1px solid grey; border-bottom: 1px solid grey">';
+  echo '</tr>';
+  echo '</table>';
+  echo '</div>';
+    // Contact DIV
+  echo '<div style="border: 2px solid #333333; width: 30%; height: 33.33%">';
+  echo '<table class="input-table">';
+  // Header
+  echo '<h1 align="center">Contact</h1>';
+  // Row 1
+  echo '<tr>';
+    // Column 1
+    echo '<td align="right" width="50%">';
     echo 'Email :<br><br>';
     echo 'Cell Phone :<br><br>';
     echo 'Office Phone :';
     echo '</td>';
-    // Column 6
-    echo '<td align="left" style="border-right: 1px solid grey; border-top: 1px solid grey; border-bottom: 1px solid grey">';
+    // Column 2
+    echo '<td align="left" width="50%">';
     echo '<input type="text" name="email" placeholder="example@email.com" maxLength="30"><br><br>';
     echo '<input type="text" name="cellPhone" placeholder="8151231000" maxLength="10"><br><br>';
     echo '<input type="text" name="officePhone" placeholder="8151231000"  maxLength="10">';
     echo '</td>';
   echo '</tr>';
- echo '</table>';
+  echo '</table>';
+  echo '</div>';
+ // End of OUTER DIV
+ echo '</div>';
 
- echo '<br>';
-
-  echo '<div align="center">';
-//    echo '<button type="reset" style="background-color: white; font-size: 16px; padding: 10px 24px; border: 2px solid #333333">Clear</button>';
-    echo '<button type="reset" class="button button1">Clear</button>';
-    echo '  ';
-    echo '<button type="submit" class="button button1">Create</button>';
+  echo '<div style="padding: 2em" align="center">';
+    echo '<button type="reset" class="button button1" style="margin: 0 2em">Clear</button>';
+    echo '<button type="submit" class="button button1" style="margin: 0 2em">Create</button>';
   echo '</div>';
 
  echo '</form>';
-/*
- echo '<table align="center" border=1>';
-     echo '<tr>';
-       echo '<td width="100" align="center">';
-           echo 'Boat Name';
-       echo '</td>';
-       echo '<td width="100" align="center">';
-         echo 'First Name';
-       echo '</td>';
-       echo '<td width="100" align="center">';
-         echo 'Last Name';
-       echo '</td>';
-       echo '<td width="150" align="center">';
-         echo 'Marina Name';
-       echo '</td>';
-       echo '<td width="100" align="center">';
-         echo 'Slip Number';
-       echo '</td>';
-     echo '</tr>';
-
-  foreach($conn->query('SELECT BoatName,FirstName,LastName,Name,SlipNum FROM Marina,MarinaSlip,Owner') as $row)
-  {
-   echo '<tr>';
-     echo '<td align="center">';
-         echo $row['BoatName'];
-     echo '</td>';
-     echo '<td align="center">';
-         echo $row['FirstName'];
-     echo '</td>';
-     echo '<td align="center">';
-         echo $row['LastName'];
-     echo '</td>';
-     echo '<td align="center">';
-         echo $row['Name'];
-     echo '</td>';
-     echo '<td align="center">';
-         echo $row['SlipNum'];
-     echo '</td>';
-   echo '</tr>';
-  }
-*/
 
   //handles button action
   if ($_SERVER['REQUEST_METHOD'] == 'POST')
   {
-    /*$firstname = $_POST['fName'];
-    $lastname = $_POST['lName'];
-    $sql = "insert into Owner (FirstName, LastName) values (?, ?)";
-    try{
-      $stmt = $conn->prepare($sql);
-      $stmt->execute(array($firstname, $lastname));
-    }
-    catch(PDOException $e){
-       $message = $e->getMessage();
-       echo "<script type='text/javascript'>alert('$message');</script>";
-    }*/
     $firstname = $_POST['fname'];
     $middle = $_POST['minit'];
     $lastname = $_POST['lname'];

@@ -4,15 +4,59 @@
 //are displayed in a drop down menu and when selected and sumbitted, the names of the boats
 //owned by that owner are displayed in a table.
 
-  $pageTitle = "Owner Boat Information";
+  $pageTitle = "Create New Event";
 
   include("header.html");
   require_once("conn.php");
 
-  echo 'Select an Owner:<br>';
+  echo '<h1>'.$pageTitle.'</h1>';
+
   //create form
   echo '<form action="createEvent.php" method="post">';
 
+  // LEFT DIV
+  echo '<div style=" border: 2px solid gray; float: left; width: 49%">';
+
+   echo '<div style="float:left; margin-right:20px; padding: 10px">';
+    echo '<label for="name" style="display: block">Name</label>';
+    echo '<input id="name" type="text" value="" name="name" style="display: block">';
+   echo '</div>';
+
+   echo '<div style="float:left; margin-right:20px; padding: 10px;">';
+    echo '<label for="date" style="display: block">Date</label>';
+    echo '<input id="date" type="date" value="" name="date" style="display: block">';
+   echo '</div>';
+
+   echo '<div style="float:left; margin-right:20px; padding: 10px">';
+    echo '<label for="time" style="display: block">Time</label>';
+    echo '<input id="time" type="time" value="" name="time" style="display: block">';
+   echo '</div>';
+
+  echo '</div>';
+
+  // RIGHT DIV
+  echo '<div style=" border: 2px solid gray; float: right; width: 49%">';
+
+   echo '<div style="float:left; margin-right:20px; padding: 10px">';
+    echo '<label for="name" style="display: block">Name</label>';
+    echo '<input id="name" type="text" value="" name="name" style="display: block">';
+   echo '</div>';
+
+   echo '<div style="float:left; margin-right:20px; padding: 10px">';
+    echo '<label for="date" style="display: block">Date</label>';
+    echo '<input id="date" type="date" value="" name="date" style="display: block">';
+   echo '</div>';
+
+   echo '<div style="float:left; margin-right:20px; padding: 10px">';
+    echo '<label for="time" style="display: block">Time</label>';
+    echo '<input id="time" type="time" value="" name="time" style="display: block">';
+   echo '</div>';
+
+  echo '</div>';
+
+  echo '</form>';
+
+/*
   //create the drop down maneu
   echo '<select name="ownersLastNames">';
   echo '<option value="empty">-- select an owner --</option>';
@@ -51,7 +95,7 @@
    echo '</table>';
   }//end if
 
-
+*/
   include("footer.html");
 
 ?>

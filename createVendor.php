@@ -3,13 +3,15 @@
 //This displays services that have been done on the specified boat.
 //If no service has been done, an appropriate message is displayed.
 
-  $pageTitle = "Boat Service Information";
+  $pageTitle = "Create New Vendor";
 
   include("header.html");
   require_once("conn.php");
 
-  echo '<br>Vendor ID: ';
-  echo '<input type="text" name="vendorID" value=01 style="width: 50px; text-align: center; background-color: #F9F6F6; color: grey" readonly><br><br>';
+  echo '<h1>'.$pageTitle.'</h1>';
+
+//  echo 'Vendor ID: ';
+//  echo '<input type="text" name="vendorID" value=01 style="width: 50px; text-align: center; background-color: #F9F6F6; color: grey" readonly><br><br>';
 
   //create form
   echo '<form action="createVendor.php" method="post">';
@@ -18,12 +20,12 @@
  echo '<div>';
 
  //VENDOR div and table
- echo '<div style="padding: 10px; border: 2px solid gray; float: left; width: 30%">';
+ echo '<div style="padding: 10px; border: 2px solid grey; float: left; width: 30%">';
   echo '<table>';
    // Row 1
    echo '<tr>';
      echo '<td colspan="2" align="center">';
-     echo '<h1>Vendor</h1>';
+     echo '<h2>Vendor</h2>';
      echo '</td>';
    echo '</tr>';
    //Row 2
@@ -66,7 +68,7 @@
    // Row 1
    echo '<tr align="center">';
      echo '<td colspan="2">';
-     echo '<h1>Address</h1>';
+     echo '<h2>Address</h2>';
      echo '</td>';
    echo '</tr>';
    //Row 2
@@ -151,7 +153,7 @@
    // Row 1
    echo '<tr align="center">';
      echo '<td colspan="2">';
-     echo '<h1>Contact</h1>';
+     echo '<h2>Contact</h2>';
      echo '</td>';
    echo '</tr>';
    // Row 2
@@ -181,9 +183,9 @@
   echo '<div align="center">';
    echo '<table width="100%" style="padding-top: 20px">';
     echo '<tr><td align="center">';
-    echo '<button type="reset">Clear</button>';
+    echo '<button type="reset" class="button button1">Clear</button>';
     echo '  ';
-    echo '<button type="submit">Create</button>';
+    echo '<button type="submit" class="button button1">Create</button>';
    echo '</td></tr>';
    echo '</table>';
   echo '</div>';
@@ -244,6 +246,46 @@ echo '</form>';
 
   }//end if
 */
+
+ //handles button action
+  if ($_SERVER['REQUEST_METHOD'] == 'POST')
+  {
+    $busname = $_POST['businessName'];
+    $firstname = $_POST['repFirstName'];
+    $lastname = $_POST['repLastName'];
+    $street = $_POST['street'];
+    $city = $_POST['city'];
+    $state = $_POST['state'];
+    $zip = $_POST['zip'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $vendorType = $_POST['vendorType'];
+
+    if (empty($busname) || empty($firstname) || empty($lastname) || empty($street) || empty($city) || empty($state)|| empty($zip)|| empty($email)|| empty($phone)) {
+     $border = "style=\"border: 1px red solid; border-radius: 4px\"";
+     echo "<script type='text/javascript'>alert('ERROR: All Fields Required\\n\\nPlease fill out all fields');</script>";
+    }
+    else if (!is_numeric($zip) || !is_numeric($phone)){
+     echo "<script type='text/javascript'>alert('ERROR: Non numeric found in numeric fields\\n\\nPhone numbers and Zip code must be numbers only');</script>";
+    }
+    else {
+     $sql = "insert into Vendor (BusinessName, Street, City, State, Zip, Type, RepFirstName, RepLastName, RepEmail, RepCellNum) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+     try{
+       $stmt = $conn->prepare($sql);
+       $stmt->execute(array($busname, $street, $city, $state, $zip, $vendorType, $firstname, $lastname, $email, $phone));
+     }
+     catch(PDOException $e){
+        $message = $e->getMessage();
+        echo "<script type='text/javascript'>alert('$message');</script>";
+     }
+
+     $msg = addslashes("$busname was added");
+     echo "<script type='text/javascript'>alert('$msg');</script>";
+    }
+
+  }
+
+
   include("footer.html");
 
 ?>

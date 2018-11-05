@@ -4,14 +4,16 @@
 //PHP code for the first page. This page displays the boat information
 //in a table. It displays the owner's name, Marina name, and Slip number of the boat.
 
-  $pageTitle = "Create Agent";
+  $pageTitle = "Create New Agent";
   $border = "style=\"border: 1px grey solid; border-radius: 4px\"";
 
   include("header.html");
   require_once("conn.php");
   //echo $pageTitle;
 
- echo '<br>Agent ID: ';
+ echo '<h1>'.$pageTitle.'</h1>';
+
+ echo 'Agent ID: ';
  echo '<input type="text" name="agentID" value=01 style="width: 50px; text-align: center; background-color: #F9F6F6; color: grey" readonly><br><br>';
 
  echo '<form action="createAgent.php" method="post">';
@@ -20,17 +22,17 @@
   // Row 1
   echo '<tr align="right">';
     echo '<td>';
-    echo '<h1>Agent Info</h1>';
+    echo '<h2>Agent Info</h2>';
     echo '</td>';
     echo '<td>';
     echo '</td>';
     echo '<td>';
-    echo '<h1>Address</h1>';
+    echo '<h2>Address</h2>';
     echo '</td>';
     echo '<td>';
     echo '</td>';
     echo '<td>';
-    echo '<h1>Contact</h1>';
+    echo '<h2>Contact</h2>';
     echo '</td>';
   echo '</tr>';
   // Row 2
@@ -140,9 +142,10 @@
  echo '<br>';
 
   echo '<div align="center">';
-    echo '<button type="reset">Clear</button>';
+//    echo '<button type="reset" style="background-color: white; font-size: 16px; padding: 10px 24px; border: 2px solid #333333">Clear</button>';
+    echo '<button type="reset" class="button button1">Clear</button>';
     echo '  ';
-    echo '<button type="submit">Create</button>';
+    echo '<button type="submit" class="button button1">Create</button>';
   echo '</div>';
 
  echo '</form>';

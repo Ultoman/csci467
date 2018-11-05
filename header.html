@@ -28,19 +28,45 @@ li a:hover {
     background-color: #111111;
 }
 
+.button {
+    background-color: #333333;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #333333;
+}
+
+.button1:hover {
+    background-color: #333333;
+    color: white;
+}
 </style>
 <!--  <title>$pageTitle</title>;
   <h1 align="center">$pageTitle</h1>;-->
 
 <!--<body>-->
 
-<h1 style="text-align:center"><a href="home.php">Global Entertainment Management(GEM) System</a></h1> 
+<h2 style="text-align:center"><a href="home.php">Global Entertainment Management(GEM) System</a></h2> 
 
 <ul>
-  <li><a href="createAgent.php">Create New Agent</a></li>
-  <li><a href="createEvent.php">Create New Event</a></li>
-  <li><a href="createVendor.php">Create New Vendor</a></li>
+  <li><a href="createAgent.php">New Agent</a></li>
+  <li><a href="createEvent.php">New Event</a></li>
+  <li><a href="createVendor.php">New Vendor</a></li>
   <li><a href="approveEvent.php">Approve Event</a></li>
+  <li><a href="generateEventStatusReport.php">Generate Report</a></li>
   <li><a href="testing.html">Testing</a></li>
   <li><a href="agents.php">Agents of SHIELD</a></li>
 </ul>

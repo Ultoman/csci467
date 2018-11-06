@@ -14,11 +14,11 @@
   echo '<form action="createVendor.php" method="post">';
 
  //OUTER DIV
- echo '<div style="display: flex; justify-content: space-between">';
+ echo '<div style="display: flex; justify-content: space-around">';
 
  //VENDOR div and table
- echo '<div style="border: 2px solid #333333; width: 30%; height: 33.33%">';
-  echo '<table class="input-table">';
+ echo '<div style="border: 2px solid #333333; width: 30%">';
+  echo '<table >';
    // Header
    echo '<h1 align="center">Vendor</h1>';
    //Row 1
@@ -56,8 +56,8 @@
  echo '</div>';
 
  //ADDRESS div and table
- echo '<div style="border: 2px solid #333333; width: 30%; height: 33.33%">';
-  echo '<table class="input-table">';
+ echo '<div style="border: 2px solid #333333; width: 30%">';
+  echo '<table>';
    // Header
    echo '<h1 align="center">Address</h1>';
    //Row 1
@@ -137,8 +137,8 @@
  echo '</div>';
 
  //CONTACT div and table
- echo '<div style="border: 2px solid #333333; width: 30%; height: 33.33%">';
-  echo '<table class="input-table">';
+ echo '<div style="border: 2px solid #333333; width: 30%;">';
+  echo '<table class=>';
    // Row 1
    echo '<h1 align="center">Contact</h1>';
    // Row 2
@@ -164,6 +164,7 @@
  echo '</div>';
 
  echo '</div>'; //end main div
+
 
   echo '<div style="padding: 2em;" align="center">';
     echo '<button type="reset" class="button button1" style="margin: 0 2em">Clear</button>';

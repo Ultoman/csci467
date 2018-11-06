@@ -16,11 +16,11 @@
  echo '<form action="createAgent.php" method="post">';
 
  // OUTER DIV
- echo '<div style="display: flex; justify-content: space-between">';
+ echo '<div style="display: flex; justify-content: space-around">';
 
  // AGENT INFO DIV
- echo '<div style="border: 2px solid #333333; width: 30%; height: 33.33%">';
- echo '<table class="input-table">';
+ echo '<div style="border: 2px solid #333333; width: 30%">';
+ echo '<table>';
   // Header
     echo '<h1 align="center">Agent Info</h1>';
   // Row 1
@@ -49,8 +49,8 @@
  echo '</table>';
  echo '</div>'; // End of Agent Info div
     // Address DIV
- echo '<div style="border: 2px solid #333333; width: 30%; height: 33.33%">';
- echo '<table class="input-table">';
+ echo '<div style="border: 2px solid #333333; width: 30%">';
+ echo '<table>';
   // Header
     echo '<h1 align="center">Address</h1>';
   // Row 1
@@ -124,9 +124,10 @@
   echo '</tr>';
   echo '</table>';
   echo '</div>';
-    // Contact DIV
-  echo '<div style="border: 2px solid #333333; width: 30%; height: 33.33%">';
-  echo '<table class="input-table">';
+
+  // Contact DIV
+  echo '<div style="border: 2px solid #333333; width: 30%">';
+  echo '<table>';
   // Header
   echo '<h1 align="center">Contact</h1>';
   // Row 1

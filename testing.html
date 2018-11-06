@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html>
 
-<!--<head>
-<style>
-div {
-    width: 320px;
-    padding: 10px;
-    border: 5px solid gray;
-    margin: 0;
-}
-</style>
-</head> -->
 <link rel="import" href="header.html">
 
 <head>
@@ -23,6 +13,47 @@ div {
   <li><a href="approveEvent.php">Approve Event</a></li>
   <li><a href="testing.html">Testing</a></li>
 </ul>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <title></title>
+
+     <script>
+         var items = [{ name: 'Sehwag', country: 'India' },
+         { name: 'Kohli', country: 'India' },
+         { name: 'Sachin', country: 'India' },
+         { name: 'ABD', country: 'Sa' },
+         { name: 'Miller', country: 'Sa' },
+         { name: 'Quinton d', country: 'Sa' }, ];
+         $(function () {
+             $('[name="Player"]').click(function (a, b) {
+                 $('#ddlPlayers option').remove();
+                 var id = a.target.id;
+                 var options = [];
+                 if (id == 'rdoIndia' && a.target.checked) {
+                     options = getItems('India')
+                 }
+                 else if (id == 'rdoSa' && a.target.checked) {
+                     options = getItems('Sa')
+                 }
+                 $('#ddlPlayers').append(options.join(''));
+                 debugger;
+             });
+         });
+
+         function getItems(country) {
+             var options = [];
+             for (var i = 0; i < items.length; i++) {
+                 var item = items[i];
+                 if (item.country == country) {
+                     options.push('<option value="' + item.name + '"> ' + item.name + ' </option>');
+                 }
+             }
+             return options;
+         }
+     </script>
+
+
+
 </head>
 
 <body>
@@ -42,19 +73,12 @@ div {
  </table>
 </div>
 
-<div>
- <table>
-  <tr>
-   <td>
-    Something
-   </td>
-   <td>
-    Something else
-   </td>
-  </tr>
- </table>
-</div>
+    India   <input type="radio" id="rdoIndia" name="Player" />
+    South Africa <input type="radio" id="rdoSa" name="Player" />
 
+    <select id="ddlPlayers">
+          <option>select</option>
+    </select>
 
 </body>
 </html>

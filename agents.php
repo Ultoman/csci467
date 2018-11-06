@@ -174,6 +174,99 @@
 
  echo '</table>';
 
+
+ echo '<br>EVENTS:<br>';
+
+ // Create EVENT table
+ echo '<table align="center" border=1 width="100%">';
+     echo '<tr nowrap>';
+       echo '<td align="center">';
+           echo 'Event ID';
+       echo '</td>';
+       echo '<td width="100" align="center">';
+           echo 'Event Name';
+       echo '</td>';
+       echo '<td width="100" align="center">';
+           echo 'Seating Capacity';
+       echo '</td>';
+       echo '<td width="100" align="center">';
+           echo 'Manager';
+       echo '</td>';
+       echo '<td width="100" align="center">';
+         echo 'Vendor';
+       echo '</td>';
+       echo '<td width="100" align="center">';
+         echo 'Singer';
+       echo '</td>';
+       echo '<td width="100" align="center">';
+         echo 'Date';
+       echo '</td>';
+       echo '<td width="100" align="center">';
+         echo 'Time';
+      echo '</tr>';
+       echo '<td width="100" align="center">';
+         echo 'Street';
+       echo '</td>';
+       echo '<td width="100" align="center">';
+         echo 'City';
+       echo '</td>';
+       echo '<td width="100" align="center">';
+         echo 'State';
+       echo '</td>';
+       echo '<td width="100" align="center">';
+         echo 'Zip';
+       echo '</td>';
+       echo '<td width="100" align="center">';
+         echo 'Status';
+       echo '</tr>';
+
+  foreach($conn->query('SELECT EventId,EventName,SeatingCapacity,BusinessName,FirstName,LastName,Date,StartTime,Status,Singer,Event.Street,Event.City,Event.State,Event.Zip FROM Event,EventManager,Vendor WHERE Event.EventManagerId = EventManager.EventManagerId AND Event.VendorId = Vendor.VendorId') as $row)
+  {
+   echo '<tr>';
+     echo '<td align="center">';
+         echo $row['EventId'];
+     echo '</td>';
+     echo '<td align="center">';
+         echo $row['EventName'];
+     echo '</td>';
+     echo '<td align="center">';
+         echo $row['SeatingCapacity'];
+     echo '</td>';
+     echo '<td align="center">';
+         echo $row['FirstName'].' '.$row['LastName'];
+     echo '</td>';
+     echo '<td align="center">';
+         echo $row['BusinessName'];
+     echo '</td>';
+     echo '<td align="center">';
+         echo $row['Singer'];
+     echo '</td>';
+     echo '<td align="center">';
+         echo $row['Date'];
+     echo '</td>';
+     echo '<td align="center">';
+         echo $row['StartTime'];
+     echo '</td>';
+     echo '<td align="center">';
+         echo $row['Street'];
+     echo '</td>';
+     echo '<td align="center">';
+         echo $row['City'];
+     echo '</td>';
+     echo '<td align="center">';
+         echo $row['State'];
+     echo '</td>';
+     echo '<td align="center">';
+         echo $row['Zip'];
+     echo '</td>';
+     echo '<td align="center">';
+         echo $row['Status'];
+     echo '</td>';
+   echo '</tr>';
+  }
+ echo '</table>';
+
+
  include("footer.html");
 
 ?>

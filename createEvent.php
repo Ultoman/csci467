@@ -9,25 +9,62 @@
   include("header.html");
   require_once("conn.php");
 
+/*  echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>';
+8
+  echo '<script>';
+     echo '$(function () {';
+       echo '$('[name="performer"]').click(function (a, b) {';
+           echo '$('#artistOptions option').remove();
+                 var id = a.target.id;
+                 var options = [];
+                 if (id == 'bandChecked' && a.target.checked) {
+                     options = getItems('Band')
+                 }
+                 else if (id == 'artistChecked' && a.target.checked) {
+                     options = getItems('Artist')
+                 }
+                 $('#artistOptions').append(options.join(''));
+                 debugger;
+             });
+         });
+
+         function getItems(choice) {
+             var options = [];
+             if(choice == 'Band'){
+               foreach($conn->query('SELECT BandName FROM Band') as $bandname)
+               {
+                 options.push('<option value="' + $bandname + '"> ' + $bandname + ' </option>');
+               }
+             }
+             else{
+               foreach($conn->query('SELECT ArtistName FROM Artist') as $artistname)
+               {
+                 options.push('<option value="' + $artistname + '"> ' + $artistname + ' </option>');
+               }
+             }
+             return options;
+         }';
+*/
+
   echo '<h1 align="center">'.$pageTitle.'</h1>';
 
   //create form
   echo '<form action="createEvent.php" method="post">';
 
  // OUTER DIV
- echo '<div style="display: flex; justify-content: space-between">';
+ echo '<div style="display: flex; justify-content: space-around">';
 
   // LEFT DIV
   echo '<div style=" border: 2px solid #333333; width: 40%">';
 
-   echo '<div style="margin-right:20px; padding: 10px">';
+   echo '<div style="margin-right:20px; padding-top: 5%; padding-left: 10%">';
     echo '<label for="name" style="display: block">Event Name</label>';
     echo '<input id="name" type="text" value="" name="name" size="40" style="display: block">';
    echo '</div>';
 
-   echo '<div style="float: left; margin-right:20px; padding: 10px;">';
+   echo '<div style="float: left; margin-right:20px; padding-left: 10%; padding-top: 10px">';
     echo '<label for="seatingCap" style="display: block">Seating Capacity</label>';
-    echo '<input id="seatingCap" type="number" min="0" value="" name="seatingCap" style="display: block; width: 70px">';
+    echo '<input id="seatingCap" type="number" min="0" value="" name="seatingCap" style="display: block; width: 120px">';
    echo '</div>';
 
    echo '<div style="margin-right:20px; padding: 10px">';
@@ -41,10 +78,10 @@
     echo '</select>';
    echo '</div>';
 
-   echo '<div style="float: left; margin-right:20px; padding: 10px">';
+   echo '<div style="float: left; margin-right:20px; padding-left: 10%">';
     echo '<label for="vendor" style="display: block">Vendor</label>';
     echo '<select name="vendor" style="display: block; width: 174px; height: 22px">';
-    echo '<option value="empty">-- select an owner --</option>';
+    echo '<option value="empty">-- select a Vendor --</option>';
     //Fill select with vendors - value:VendorId, display:BusinessName
     foreach($conn->query('SELECT VendorId,BusinessName FROM Vendor') as $vendors)
     {
@@ -53,59 +90,59 @@
     echo '</select>';
    echo '</div>';
 
-   echo '<div style="float: left; margin-right:20px; padding: 10px">';
-    echo '<form action="" method="post">';
-    echo '<input type="radio" name="performer" value="bandChecked" checked="checked"> Band';
-    echo '<input type="radio" name="performer" value="artistChecked"> Artist';
-    echo '</form>';
-   echo '</div>';
-   echo '<div>';
-   if (isset($_POST['performer'])) {
-    if ($_POST["performer"] == "bandChecked") {
-    echo '<select name="band" style="display: block; width: 174px; height: 22px">';
-    echo '<option value="1">Band 1</option>';
-    echo '</select>';
-    }
-    else if ($_POST['performer'] == "artistChecked") {
-    echo '<select name="artist" style="display: block; width: 174px; height: 22px">';
-    echo '<option value="2">Artist 1</option>';
-    echo '</select>';
-    }
-    else {
-    echo '<label style="display: block">Choose an option</label>';
-    }
-   }
-   echo '</div>';
+   // BAND or ARTIST radio button and select
+   echo '<div style="float: left; margin-right:20px; padding-left: 10px">';
+//    echo '<form action="" method="post">';
+//    echo '<input type="radio" name="performer" value="bandChecked" id="band" checked="checked"> Band';
+//    echo '<input type="radio" name="performer" value="artistChecked" id="artist"> Artist';
+    echo '<label for="artistSelect" style="display: block">Singer</label>';
 
+    echo '<select name="artistSelect" style="display: block; width: 174px; height: 22px">';
+    echo '<option value="empty">-- select a Singer --</option>';
+      foreach($conn->query('SELECT BandName FROM Band') as $bandname)
+      {
+       echo '<option value="'.$bandname['BandName'].'">'.$bandname['BandName'].' - BAND</option>';
+      }
+      foreach($conn->query('SELECT FirstName,LastName FROM Artist') as $bandname)
+      {
+       echo '<option value="'.$bandname['FirstName'].' '.$bandname['LastName'].'">'.$bandname['FirstName'].' '.$bandname['LastName'].' - ARTIST</option>';
+      }
+    echo '</select>';
+   echo '</div>'; // radio/select DIV end
+
+   echo '<div style="float:left; padding-top: 10px; padding-left: 10%; padding-bottom: 5%">';
+    echo '<label for="notes" style="display: block">Special Notes</label>';
+    echo '<textarea id="notes" name="notes" style="display: block" rows="4" cols="50"></textarea>';
+   echo '</div>';
 
   echo '</div>'; // LEFT DIV END
 
   // RIGHT DIV
   echo '<div style=" border: 2px solid #333333; width: 40%">';
 
-   echo '<div style="float: left; margin-right:20px; padding: 10px">';
+   echo '<div style="float: left; margin-right:20px; padding-top: 5%; padding-left: 10%">';
     echo '<label for="date" style="display: block">Date</label>';
     echo '<input id="date" type="date" value="" name="date" style="display: block">';
    echo '</div>';
 
-   echo '<div style="margin-right:20px; padding: 10px">';
+   echo '<div style="margin-right:20px; padding-top: 5%">';
     echo '<label for="time" style="display: block">Time</label>';
     echo '<input id="time" type="time" value="" name="time" style="display: block">';
    echo '</div>';
 
-   echo '<div style="float: left; margin-right:20px; padding: 10px">';
+   echo '<div style="float: left; margin-right:20px; padding-left: 10%; padding-top: 10px">';
     echo '<label for="street" style="display: block">Street</label>';
     echo '<input type="text" name="street" placeholder="123 Broadway Dr" size="35" maxLength="50"><br><br>';
    echo '</div>';
 
-   echo '<div style="margin-right:20px; padding: 10px">';
+   echo '<div style="margin-right:20px; padding-top: 10px">';
     echo '<label for="city" style="display: block">City</label>';
-    echo '<input type="text" name="city" placeholder="City" size="20" maxLength="20"><br><br>';
+    echo '<input type="text" name="city" placeholder="City" size="15" maxLength="20"><br><br>';
    echo '</div>';
 
-   echo '<div style="margin-right:20px; padding: 10px">';
+   echo '<div style="float: left; margin-right:20px; padding-left: 10%">';
    echo '<label for="state" style="display: block">State</label>';
-    echo '<select name="state" style="width: 174px">';
+    echo '<select name="state" style="width:174px">';
     echo '<option value="AL">Alabama</option>';
     echo '<option value="AK">Alaska</option>';
     echo '<option value="AZ">Arizona</option>';
@@ -160,7 +197,7 @@
     echo '</select><br><br>';
   echo '</div>';
 
-  echo '<div style="margin-right:20px; padding: 10px">';
+  echo '<div style="margin-right:20px;">';
   echo '<label for="zip" style="display: block">ZIP</label>';
     echo '<input type="text" name="zip" placeholder="12345" maxLength="10">';
   echo '</div>';
@@ -169,47 +206,15 @@
 
   echo '</div>'; // OUTER DIV END
 
+  echo '<div style="padding: 2em;" align="center">';
+    echo '<button type="reset" class="button button1" style="margin: 0 2em">Clear</button>';
+    echo '<button type="submit" class="button button1" style="margin: 0 2em">Create</button>';
+  echo '</div>';
+
   echo '</form>';
 
 /*
-  //create the drop down maneu
-  echo '<select name="ownersLastNames">';
-  echo '<option value="empty">-- select an owner --</option>';
-
-  //populate drop down with database info
-  foreach($conn->query('SELECT LastName FROM Owner') as $ownersLastNames)
-  {
-   echo '<option value="'.$ownersLastNames['LastName'].'">'.$ownersLastNames['LastName'].'</option>';
-  }
-  echo '</select>';
-
-  echo '<br><br>';
-  echo '<input type="submit" name="submit" value="Show">';
-  echo '&nbsp&nbsp&nbsp';
-  echo '<input type="reset" name="reset">';
-
-  echo '</form>';
-
-  //handles button action
-  if ($_SERVER['REQUEST_METHOD'] == 'POST')
-  {
-   $lastname = $_POST['ownersLastNames'];
-   $sql = "select BoatName from MarinaSlip,Owner where Owner.LastName = '$lastname' and Owner.OwnerId = MarinaSlip.OwnerNum";
-
-   echo 'Boats owned by '.$lastname.':<br><br>';
-
-   echo '<table border=1>';
-   foreach($conn->query($sql) as $row)
-   {
-    echo '<tr>';
-      echo '<td width=100 align="center">';
-        echo $row['BoatName'];
-      echo '</td>';
-    echo '</tr>';
-   }//end for each
-   echo '</table>';
-  }//end if
-
+ Handle POST - Form submission
 */
   if ($_SERVER['REQUEST_METHOD'] == "POST")
   {
@@ -222,11 +227,13 @@
     $date = $_POST['date'];
     $time = $_POST['time'];
     $vendor = $_POST['vendor'];
-    $band = $_POST['band'];
-    $artist = $_POST['artist'];
+//    $band = $_POST['band'];
+//    $artist = $_POST['artist'];
+    $singer = $_POST['artistSelect'];
     $manager = $_POST['manager'];
+    $notes = $_POST['notes'];
 
-    if (empty($name) || empty($seatingCap) || empty($date) || empty($street) || empty($city) || empty($state)|| empty($zip)|| empty($time)|| $vendor == "empty" || $band == "empty" || $artist == "empty" || $manager == "empty") {
+    if (empty($name) || empty($seatingCap) || empty($date) || empty($street) || empty($city) || empty($state)|| empty($zip)|| empty($time)|| $vendor == "empty" || $singer == "empty" || $manager == "empty") {
      $border = "style=\"border: 1px red solid; border-radius: 4px\"";
      echo "<script type='text/javascript'>alert('ERROR: All Fields Required\\n\\nPlease fill out all fields');</script>";
     }
@@ -234,20 +241,46 @@
      echo "<script type='text/javascript'>alert('ERROR: Non numeric found in numeric fields\\n\\nPhone numbers and Zip code must be numbers only');</script>";
     }
     else {
-     $sql = "insert into Event (Street, City, State, Date, StartTime, Status, SeatingCapacity, Notes, BandId, ArtistId, EventManagerId, VendorId) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+     $sql = "insert into Event (EventName, Street, City, State, Zip, Date, StartTime, Status, SeatingCapacity, Notes, Singer, EventManagerId, VendorId) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
      try{
        $stmt = $conn->prepare($sql);
-       $stmt->execute(array($street, $city, $state, $date, $time, "created", $seatingCap, "Created", $band, $artist, $manager, $vendor));
+       $stmt->execute(array($name, $street, $city, $state, $zip, $date, $time, "created", $seatingCap, $notes, $singer, $manager, $vendor));
      }
      catch(PDOException $e){
         $message = $e->getMessage();
         echo "<script type='text/javascript'>alert('$message');</script>";
      }
 
-     $msg = addslashes("$busname was added");
+     $msg = addslashes("Event '$name' was added");
      echo "<script type='text/javascript'>alert('$msg');</script>";
     }
   }
+
+  $names = $conn->query('SELECT BandName FROM Band');
+
+/*  foreach($names as $bandname)
+  {
+   echo '<option value="'.$bandname['BandName'].'">'.$bandname['BandName'].'</option>';
+  }*/
+
+ echo '<script type=text/javascript>';
+ echo '  $( "#band" ).click(function() {';
+// echo '    alert( "Handler for .click() for BAND called." );';
+// echo '    var options = $names;';
+ echo '    alert( "click me" + $names );';
+ echo '    var vals = [];';
+// echo '    for(var i = 0; i < options.length; i++){';
+// echo '     vals.push(\'<option value="\' + options[\'BandName\'] + \'"> \' + options[\'BandName\'] + \' </option>\');';
+ echo '     vals.push(\'<option value="something">SOMething</option>\');';
+// echo '    }';
+ echo '$("#artistOptions").append(vals.join(""));';
+ echo '});</script>';
+
+ echo '<script type=text/javascript>';
+ echo '  $( "#artist" ).click(function() {';
+ echo '    alert( "Handler for .click() for ARTIST called." );';
+ echo '});</script>';
+
 
   include("footer.html");
 

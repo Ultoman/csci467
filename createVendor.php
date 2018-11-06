@@ -21,7 +21,7 @@
   echo '<table class="input-table">';
    // Header
    echo '<h1 align="center">Vendor</h1>';
-   //Row 2
+   //Row 1
    echo '<tr>';
     // Column 1
     echo '<td align="right" width="50%">';
@@ -58,9 +58,9 @@
  //ADDRESS div and table
  echo '<div style="border: 2px solid #333333; width: 30%; height: 33.33%">';
   echo '<table class="input-table">';
-   // Row 1
+   // Header
    echo '<h1 align="center">Address</h1>';
-   //Row 2
+   //Row 1
    echo '<tr>';
     // Column 1
     echo '<td align="right" width="50%">';
@@ -71,7 +71,7 @@
     echo 'ZIP :';
     echo '<br><br>';
     echo '</td>';
-    // Column 4
+    // Column 2
     echo '<td align="left" width="50%">';
     echo '<br>';
     echo '<input type="text" name="street" placeholder="123 Broadway Dr" maxLength="50"><br><br>';

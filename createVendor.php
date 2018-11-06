@@ -4,8 +4,8 @@
 //If no service has been done, an appropriate message is displayed.
 
   $pageTitle = "Create New Vendor";
-  include("main.css");
   include("header.html");
+  include("main.css");
   require_once("conn.php");
   $border = "style=\"border: 1px grey solid; border-radius: 4px\"";
   echo '<h1 align="center">'.$pageTitle.'</h1>';
@@ -18,7 +18,7 @@
 
  //VENDOR div and table
  echo '<div style="border: 2px solid #333333; width: 30%">';
-  echo '<table >';
+  echo '<table class="input-table">';
    // Header
    echo '<h1 align="center">Vendor</h1>';
    //Row 1
@@ -57,7 +57,7 @@
 
  //ADDRESS div and table
  echo '<div style="border: 2px solid #333333; width: 30%">';
-  echo '<table>';
+  echo '<table class="input-table">';
    // Header
    echo '<h1 align="center">Address</h1>';
    //Row 1
@@ -138,7 +138,7 @@
 
  //CONTACT div and table
  echo '<div style="border: 2px solid #333333; width: 30%;">';
-  echo '<table class=>';
+  echo '<table class="input-table">';
    // Row 1
    echo '<h1 align="center">Contact</h1>';
    // Row 2

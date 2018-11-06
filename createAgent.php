@@ -6,8 +6,8 @@
 
   $pageTitle = "Create New Agent";
   $border = "style=\"border: 1px grey solid; border-radius: 4px\"";
-  include("main.css");
   include("header.html");
+  include("main.css");
   require_once("conn.php");
   //echo $pageTitle;
 
@@ -20,7 +20,7 @@
 
  // AGENT INFO DIV
  echo '<div style="border: 2px solid #333333; width: 30%">';
- echo '<table>';
+ echo '<table class="input-table">';
   // Header
     echo '<h1 align="center">Agent Info</h1>';
   // Row 1
@@ -50,7 +50,7 @@
  echo '</div>'; // End of Agent Info div
     // Address DIV
  echo '<div style="border: 2px solid #333333; width: 30%">';
- echo '<table>';
+ echo '<table class="input-table">';
   // Header
     echo '<h1 align="center">Address</h1>';
   // Row 1
@@ -127,7 +127,7 @@
 
   // Contact DIV
   echo '<div style="border: 2px solid #333333; width: 30%">';
-  echo '<table>';
+  echo '<table class="input-table">';
   // Header
   echo '<h1 align="center">Contact</h1>';
   // Row 1

@@ -227,8 +227,6 @@
     $date = $_POST['date'];
     $time = $_POST['time'];
     $vendor = $_POST['vendor'];
-//    $band = $_POST['band'];
-//    $artist = $_POST['artist'];
     $singer = $_POST['artistSelect'];
     $manager = $_POST['manager'];
     $notes = $_POST['notes'];

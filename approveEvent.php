@@ -1,14 +1,12 @@
-\<?php
+<?php
 //Jackie Salim
 //This allows the user to add an Owner
 
-  $pageTitle = "Approve Event";
+  $pageTitle = "Choose Event to Approve";
   include("main.css");
   include("header.html");
   include("approveEvent.css");
   require_once("conn.php");
-
-  $render;
 
   echo '<h1 align="center">'.$pageTitle.'</h1>';
 
@@ -24,7 +22,7 @@
     echo '<th>Date</th>';
     echo '<th> </th>';
     echo '</tr>';
-    foreach($conn->query('SELECT EventId,EventName,SeatingCapacity,BusinessName,FirstName,LastName,Date,StartTime,Status,Singer,Event.Street,Event.City,Event.State,Event.Zip FROM Event,EventManager,Vendor WHERE Event.EventManagerId = EventManager.EventManagerId AND Event.VendorId = Vendor.VendorId') as $events)
+    foreach($conn->query('SELECT EventId,EventName,SeatingCapacity,BusinessName,FirstName,LastName,Date,StartTime,Status,Singer,Event.Street,Event.City,Event.State,Event.Zip FROM Event,EventManager,Vendor WHERE Event.EventManagerId = EventManager.EventManagerId AND Event.VendorId = Vendor.VendorId AND status != "approved"') as $events)
     {
     // Event Row
     echo '<form action="eventInfo.php" method="get">';

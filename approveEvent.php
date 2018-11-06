@@ -22,13 +22,13 @@
     echo '<th>Vendor</th>';
     echo '<th></th>';
     echo '</tr>';
+    echo '<select>';
     foreach($conn->query('SELECT EventId,EventName FROM Event WHERE Status = "created"') as $events)
     {
     // Event Row
-    echo '<tr>';
     echo '<option value="' .$events['EventId']. '">'.$events['EventName'].'</option>';
-    echo '</tr>';
     }
+    echo '</select>';
     echo '</table>';
   echo '</div>';
 

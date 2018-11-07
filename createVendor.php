@@ -1,7 +1,4 @@
 <?php
-//Jackie Salim
-//This displays services that have been done on the specified boat.
-//If no service has been done, an appropriate message is displayed.
 
   $pageTitle = "Create New Vendor";
   include("header.html");
@@ -25,15 +22,16 @@
    echo '<tr>';
     // Column 1
     echo '<td align="right" width="50%">';
-    echo 'Vendor Type :<br><br>';
-    echo 'Business Name :<br><br>';
-    echo 'Representative First Name :<br><br>';
-    echo 'Representative Last Name :<br><br>';
+    echo 'Vendor Type<span style="color: red">*</span> :<br><br>';
+    echo 'Business Name<span style="color: red">*</span> :<br><br>';
+    echo 'Representative First Name<span style="color: red">*</span> :<br><br>';
+    echo 'Representative Last Name<span style="color: red">*</span> :<br><br>';
     echo '</td>';
      // Column 2
     echo '<td align="left" width="50%">';
     echo '<br>';
-    echo '<select name="vendorType" style="width: 174px">';
+    echo '<select required name="vendorType" style="width: 174px">';
+    echo '<option value="" disabled selected>-- select a Vendor Type --</option>';
     echo '<option value="concertHall">Concert Hall</option>';
     echo '<option value="equipment">Equipment</option>';
     echo '<option value="setup">Setup</option>';
@@ -46,9 +44,9 @@
     echo '<option value="advertisement">Advertisement</option>';
     echo '<option value="other">Others</option>';
     echo '</select><br><br>';
-    echo '<input type="text" name="businessName" placeholder="Joe\'s Catering Service" maxLength="50"><br><br>';
-    echo '<input type="text" name="repFirstName" placeholder="John" maxLength="25"><br><br>';
-    echo '<input type="text" name="repLastName" placeholder="Doe" maxLength="25"><br><br>';
+    echo '<input required type="text" name="businessName" placeholder="Joe\'s Catering Service" maxLength="50"><br><br>';
+    echo '<input required type="text" name="repFirstName" placeholder="John" maxLength="25"><br><br>';
+    echo '<input required type="text" name="repLastName" placeholder="Doe" maxLength="25"><br><br>';
     echo '<br>';
     echo '</td>';
    echo '</tr>';
@@ -65,18 +63,19 @@
     // Column 1
     echo '<td align="right" width="50%">';
     echo '<br>';
-    echo 'Street :<br><br>';
-    echo 'City :<br><br>';
-    echo 'State :<br><br>';
-    echo 'ZIP :';
+    echo 'Street<span style="color: red">*</span> :<br><br>';
+    echo 'City<span style="color: red">*</span> :<br><br>';
+    echo 'State<span style="color: red">*</span> :<br><br>';
+    echo 'ZIP<span style="color: red">*</span> :';
     echo '<br><br>';
     echo '</td>';
     // Column 2
     echo '<td align="left" width="50%">';
     echo '<br>';
-    echo '<input type="text" name="street" placeholder="123 Broadway Dr" maxLength="50"><br><br>';
-    echo '<input type="text" name="city" placeholder="City" maxLength="20"><br><br>';
-    echo '<select name="state" style="width: 174px">';
+    echo '<input required type="text" name="street" placeholder="123 Broadway Dr" maxLength="50"><br><br>';
+    echo '<input required type="text" name="city" placeholder="City" maxLength="20"><br><br>';
+    echo '<select required name="state" style="width: 174px">';
+    echo '<option value="" disabled selected>-- select a State --</option>';
     echo '<option value="AL">Alabama</option>';
     echo '<option value="AK">Alaska</option>';
     echo '<option value="AZ">Arizona</option>';
@@ -129,7 +128,7 @@
     echo '<option value="WI">Wisconsin</option>';
     echo '<option value="WY">Wyoming</option>';
     echo '</select><br><br>';
-    echo '<input type="text" name="zip" placeholder="12345" maxLength="10">';
+    echo '<input required type="text" name="zip" placeholder="12345" maxLength="10">';
     echo '<br><br>';
     echo '</td>';
    echo '</tr>';
@@ -146,16 +145,16 @@
       // Column 1
     echo '<td align="right" width="50%">';
     echo '<br><br>';
-    echo 'Email :<br><br>';
-    echo 'Phone :<br><br>';
+    echo 'Email<span style="color: red">*</span> :<br><br>';
+    echo 'Phone<span style="color: red">*</span> :<br><br>';
     echo '<br><br>';
 
     echo '</td>';
     // Column 2
     echo '<td align="left" width="50%">';
     echo '<br><br>';
-    echo '<input type="text" name="email" placeholder="example@email.com" maxLength="40"><br><br>';
-    echo '<input type="text" name="phone" placeholder="8151231000" maxLength="10"><br><br>';
+    echo '<input required type="text" name="email" placeholder="example@email.com" maxLength="40"><br><br>';
+    echo '<input required type="text" name="phone" placeholder="8151231000" maxLength="10"><br><br>';
     echo '<br><br>';
     echo '</td>';
    echo '</tr>';
@@ -187,12 +186,19 @@ echo '</form>';
     $phone = $_POST['phone'];
     $vendorType = $_POST['vendorType'];
 
+    $ccity = str_replace(' ', '', $city);
+    $ffname = str_replace(' ', '', $firstname);
+    $llname = str_replace(' ', '', $lastname);
+
     if (empty($busname) || empty($firstname) || empty($lastname) || empty($street) || empty($city) || empty($state)|| empty($zip)|| empty($email)|| empty($phone)) {
      $border = "style=\"border: 1px red solid; border-radius: 4px\"";
      echo "<script type='text/javascript'>alert('ERROR: All Fields Required\\n\\nPlease fill out all fields');</script>";
     }
     else if (!is_numeric($zip) || !is_numeric($phone)){
      echo "<script type='text/javascript'>alert('ERROR: Non numeric found in numeric fields\\n\\nPhone numbers and Zip code must be numbers only');</script>";
+    }
+    else if (strpbrk($ccity, '1234567890') || strpbrk($ffname, '1234567890') || strpbrk($llname, '1234567890')){
+     echo "<script type='text/javascript'>alert('ERROR: Numeric found in non numeric fields\\n\\nNames and City must be alphabetic letters only');</script>";
     }
     else {
      $sql = "insert into Vendor (BusinessName, Street, City, State, Zip, Type, RepFirstName, RepLastName, RepEmail, RepCellNum) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";

@@ -84,12 +84,15 @@
    echo '</tr>'; // END ROW 4
   echo '</table>'; // END TABLE
   echo '</div>'; // INNER DIV
+
   echo '<div style="padding: 2em;" align="center">';
-    echo '<button type="reset" class="button button1" style="margin: 0 2em">Clear</button>';
+    echo '<button class="button button1" style="margin: 0 2em" onClick="history.back()" name="foo" value="cancel">Cancel</button>';
     echo '<button type="submit" class="button button1" style="margin: 0 2em">Approve</button>';
   echo '</div>';
+
   echo '</div>'; // OUTER DIV
   echo '</form>';
+
   } //FOREACH
   } //END IF
 /*
@@ -109,4 +112,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
      echo "<script type='text/javascript'>alert('$msg');</script>";
   }
 */
+
+ include('footer.html');
 ?>

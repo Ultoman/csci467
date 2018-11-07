@@ -1,15 +1,10 @@
 <?php
 
-//Jackie Salim
-//PHP code for the first page. This page displays the boat information
-//in a table. It displays the owner's name, Marina name, and Slip number of the boat.
-
   $pageTitle = "Create New Agent";
   $border = "style=\"border: 1px grey solid; border-radius: 4px\"";
   include("header.html");
   include("main.css");
   require_once("conn.php");
-  //echo $pageTitle;
 
  echo '<h1 align="center">'.$pageTitle.'</h1>';
 
@@ -27,22 +22,23 @@
   echo '<tr>';
     // Column 1
     echo '<td align="right" width="50%">';
-    echo 'Agent Type :<br><br>';
-    echo 'First Name :<br><br>';
-    echo 'Middle Initial :<br><br>';
-    echo 'Last Name :';
+    echo 'Agent Type<span style="color: red">*</span> :<br><br>';
+    echo 'First Name<span style="color: red">*</span> :<br><br>';
+    echo 'Middle Initial<span style="color: red">*</span> :<br><br>';
+    echo 'Last Name<span style="color: red">*</span> :';
     echo '</td>';
     // Column 2
     echo '<td align="left" width="50%">';
     echo '<br>';
-    echo '<select name="agentType" style="width: 174px">';
+    echo '<select required name="agentType" style="width: 174px">';
+    echo '<option value="" disabled selected>-- select an Agent Type --</option>';
     echo '<option value="For Artist">For Artist</option>';
     echo '<option value="For Band">For Band</option>';
     echo '<option value="Other">Other</option>';
     echo '</select><br><br>';
-    echo '<input type="text" name="fname" placeholder="Jane" maxLength="25"><br><br>';
-    echo '<input type="text" name="minit" placeholder="G" maxLength="1"><br><br>';
-    echo '<input type="text" name="lname" placeholder="Doe" maxLength="25">';
+    echo '<input required type="text" name="fname" placeholder="Jane" maxLength="25"><br><br>';
+    echo '<input required type="text" name="minit" placeholder="G" maxLength="1"><br><br>';
+    echo '<input required type="text" name="lname" placeholder="Doe" maxLength="25">';
     echo '<br><br>';
     echo '</td>';
   echo '</tr>';
@@ -57,16 +53,17 @@
   echo '<tr>';
     // Column 1
     echo '<td align="right" width="50%">';
-    echo 'Street :<br><br>';
-    echo 'City :<br><br>';
-    echo 'State :<br><br>';
-    echo 'ZIP :';
+    echo 'Street<span style="color: red">*</span> :<br><br>';
+    echo 'City<span style="color: red">*</span> :<br><br>';
+    echo 'State<span style="color: red">*</span> :<br><br>';
+    echo 'ZIP<span style="color: red">*</span> :';
     echo '</td>';
     // Column 2
     echo '<td align="left" width="50%">';
-    echo '<input type="text" name="street" placeholder="123 W Broadway Dr" maxLength="50"><br><br>';
-    echo '<input type="text" name="city" placeholder="City" maxLength="20"><br><br>';
-    echo '<select name="state" style="width: 174px">';
+    echo '<input required type="text" name="street" placeholder="123 W Broadway Dr" maxLength="50"><br><br>';
+    echo '<input required type="text" name="city" placeholder="City" maxLength="20"><br><br>';
+    echo '<select required name="state" style="width: 174px">';
+    echo '<option value="" disabled selected>-- select a State --</option>';
     echo '<option value="AL">Alabama</option>';
     echo '<option value="AK">Alaska</option>';
     echo '<option value="AZ">Arizona</option>';
@@ -119,7 +116,7 @@
     echo '<option value="WI">Wisconsin</option>';
     echo '<option value="WY">Wyoming</option>';
     echo '</select><br><br>';
-    echo '<input type="text" name="zip" placeholder="12345"  maxLength="10">';
+    echo '<input required type="text" name="zip" placeholder="12345"  maxLength="10">';
     echo '</td>';
   echo '</tr>';
   echo '</table>';
@@ -134,15 +131,15 @@
   echo '<tr>';
     // Column 1
     echo '<td align="right" width="50%">';
-    echo 'Email :<br><br>';
-    echo 'Cell Phone :<br><br>';
-    echo 'Office Phone :';
+    echo 'Email<span style="color: red">*</span> :<br><br>';
+    echo 'Cell Phone<span style="color: red">*</span> :<br><br>';
+    echo 'Office Phone<span style="color: red">*</span> :';
     echo '</td>';
     // Column 2
     echo '<td align="left" width="50%">';
-    echo '<input type="text" name="email" placeholder="example@email.com" maxLength="30"><br><br>';
-    echo '<input type="text" name="cellPhone" placeholder="8151231000" maxLength="10"><br><br>';
-    echo '<input type="text" name="officePhone" placeholder="8151231000"  maxLength="10">';
+    echo '<input required type="text" name="email" placeholder="example@email.com" maxLength="30"><br><br>';
+    echo '<input required type="text" name="cellPhone" placeholder="8151231000" maxLength="10"><br><br>';
+    echo '<input required type="text" name="officePhone" placeholder="8151231000"  maxLength="10">';
     echo '</td>';
   echo '</tr>';
   echo '</table>';
@@ -172,12 +169,20 @@
     $officePhone = $_POST['officePhone'];
     $agentType = $_POST['agentType'];
 
+    $zzip = str_replace(' ', '', $zip);
+    $ffirst = str_replace(' ', '', $firstname);
+    $llast = str_replace(' ', '', $lastname);
+    $ccity = str_replace(' ', '', $city);
+
     if (empty($firstname) || empty($middle) || empty($lastname) || empty($street) || empty($city) || empty($state)|| empty($zip)|| empty($email)|| empty($officePhone)|| empty($cellPhone)) {
      $border = "style=\"border: 1px red solid; border-radius: 4px\"";
      echo "<script type='text/javascript'>alert('ERROR: All Fields Required\\n\\nPlease fill out all fields');</script>";
     }
-    else if (!is_numeric($zip) || !is_numeric($officePhone) || !is_numeric($cellPhone)){
+    else if (!is_numeric($zzip) || !is_numeric($officePhone) || !is_numeric($cellPhone)){
      echo "<script type='text/javascript'>alert('ERROR: Non numeric found in numeric fields\\n\\nPhone numbers and Zip code must be numbers only');</script>";
+    }
+    else if (!ctype_alpha($middle) || strpbrk($ffirst, '1234567890') || strpbrk($llast, '1234567890') || strpbrk($ccity, '1234567890')){
+     echo "<script type='text/javascript'>alert('ERROR: Numeric found in non numeric fields\\n\\nNames and City must be alphabetic letters only\\nCity: $city\\nName: $firstname $middle $lastname');</script>";
     }
     else {
      //Not Empty
@@ -192,7 +197,6 @@
      }
 
      $msg = "$firstname $middle. $lastname was added";
- //    echo "<script type='text/javascript'>alert('$firstname $lastname was addeded.\n\nAddress:\n$street $city , $state $zip\n\nContact:\nemail: $email\ncell: $cellPhone\noffice: $officePhone\n\nAgent Type: $agentType');</script>";
      echo "<script type='text/javascript'>alert('$msg');</script>";
     }
   }

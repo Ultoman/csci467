@@ -60,14 +60,15 @@ CREATE TABLE Band
 BandName CHAR(20),
 RatePerEvent double,
 Notes TEXT,
+CellNum CHAR(10),
 AgentId int,
 foreign key (AgentId) references Agent(AgentId));
 
 /*put at least 5 records in this table, with at least two pets owned by the same owner*/
 
-INSERT INTO Band (BandName, RatePerEvent, Notes, AgentId) VALUES
-('DNCE',200.00, 'Joe Jonas ayyyy', 3),
-('Queen',3000.00, 'rest in peace', 5);
+INSERT INTO Band (BandName, RatePerEvent, Notes, CellNum, AgentId) VALUES
+('DNCE',200.00, 'Joe Jonas ayyyy','8653479283', 3),
+('Queen',3000.00, 'rest in peace','1118675309', 5);
 
 /*create a table called Artist with an artist id (auto-increment primary key), first name, middle initial, last name, gender, address, contact info, 
 concert rate per event, agent foreign key */
@@ -156,6 +157,7 @@ StartTime TIME,
 Status CHAR(10),
 SeatingCapacity int,
 Notes TEXT,
+NumTicketsSold int,
 Singer CHAR(53),
 PerformerType CHAR(6),
 PerformerId int,
@@ -177,9 +179,9 @@ foreign key (VendorId) references Vendor(VendorId));
 ('Ho Ho Hooville','231 N Pole Court','North Pole','AK','90667','2018-12-15','20:30:00','sold out',250,'Holiday House Party','Ariana Grande',2,2),
 ('Classy Babes Only','5398 W Something Else Drive','New York','NY','72713','2019-04-09','06:45:00','created',20,'Intimate Early Risers tea party','Queen',3,3);*/
 
-INSERT INTO Event (EventName,Street,City,State,Zip,Date,StartTime,Status,SeatingCapacity,Notes,Singer,PerformerType,PerformerId,EventManagerId,VendorId) VALUES
-('Cake by the House Cafe','123 N Who Lane','Madison','WI','60115','2019-12-15','12:00:00','created',50,'House Cafe','DNCE','Band',1,1,1),
-('Ho Ho Hooville','231 N Pole Court','North Pole','AK','90667','2018-12-15','20:30:00','sold out',250,'Holiday House Party','Ariana Grande','Artist',4,2,2),
-('Classy Babes Only','5398 W Something Else Drive','New York','NY','72713','2019-04-09','06:45:00','created',20,'Intimate Early Risers tea party','Queen','Band',2,3,3);
+INSERT INTO Event (EventName,Street,City,State,Zip,Date,StartTime,Status,SeatingCapacity,Notes,NumTicketsSold,Singer,PerformerType,PerformerId,EventManagerId,VendorId) VALUES
+('Cake by the House Cafe','123 N Who Lane','Madison','WI','60115','2019-12-15','12:00:00','created',50,'House Cafe',0,'DNCE','Band',1,1,1),
+('Ho Ho Hooville','231 N Pole Court','North Pole','AK','90667','2018-12-15','20:30:00','sold out',250,'Holiday House Party',250,'Ariana Grande','Artist',4,2,2),
+('Classy Babes Only','5398 W Something Else Drive','New York','NY','72713','2019-04-09','06:45:00','created',20,'Intimate Early Risers tea party',3,'Queen','Band',2,3,3);
 
 

@@ -19,10 +19,15 @@
   echo '<div align="center">';
   echo '<div style=" border: 2px solid #333333; width: 80%">'; // INNER DIV
    echo '<table width="100%">'; //TABLE
+
    echo '<div style="float: left; padding: 1em">';
-    echo '<label>Event Id :</label>';
+    echo '<label>Event Id : </label>';
     echo '<input style="background: #eeeeee; text-align: center" name="eventId" value="'.$events['EventId'].'" size="3" readonly>';
    echo '</div>';
+   echo '<div style="float: right; padding: 1em">';
+    echo '<input style="display:none" name="eventname" value="'.$events['EventName'].'" readonly>';
+   echo '</div>';
+
    echo '<tr>'; // ROW 1
    echo '<td align="right" width="25%">'; // COL 1 HEADER
     echo '<label>Seating Capacity :</label>';
@@ -87,7 +92,7 @@
 
   echo '<div style="padding: 2em;" align="center">';
     echo '<button class="button button1" style="margin: 0 2em" onClick="history.back()" name="foo" value="cancel">Cancel</button>';
-    echo '<button type="submit" class="button button1" style="margin: 0 2em">Approve</button>';
+    echo '<button type="submit" class="button button1" style="margin: 0 2em" name="foo" value="submit">Approve</button>';
   echo '</div>';
 
   echo '</div>'; // OUTER DIV
@@ -95,23 +100,6 @@
 
   } //FOREACH
   } //END IF
-/*
-if ($_SERVER['REQUEST_METHOD'] == "POST")
-  {
-    $id = $_POST['eventId'];
-    echo $id;
-     $sql = "UPDATE Event SET Status = 'approved' WHERE EventId = ".$id;
-     try{
-       $conn->query($sql);
-     }
-     catch(PDOException $e){
-        $message = $e->getMessage();
-        echo "<script type='text/javascript'>alert('$message');</script>";
-     }
-     $msg = addslashes("Event '$id' was approved");
-     echo "<script type='text/javascript'>alert('$msg');</script>";
-  }
-*/
 
  include('footer.html');
 ?>

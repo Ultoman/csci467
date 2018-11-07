@@ -37,7 +37,8 @@ INSERT INTO Agent (FirstName,MiddleInit,LastName,Street,City,State,Zip,Email,Off
 ('Anderson','T','Bill','1454 W Blue Drive','Peoria','IL','61615','andersontb@gmail.com','3098286745','3097650387','for artist'),
 ('Blake','J','Lee','2311 N Ridge Way','San Francisco','CA','94110','blakejl@gmail.com','8671235098','8769876543','for band'),
 ('Elena','P','Jones','300 E Pastor Court','Pittsburgh','PA','15106','elenapj@gmail.com','8896541324','0090000009','others'),
-('Feenstra','Q','Daniels','111 S That Lane','Dekalb','IL','60115','feestraqd@gmail.com','9998887777','8152341223','for band');
+('Feenstra','Q','Daniels','111 S That Lane','Dekalb','IL','60115','feestraqd@gmail.com','9998887777','8152341223','for band'),
+('Sunny','','Kim','544 W Hollywood Boulevard','Hollywood','CA','77630','sunnykim@gmail.com','9384387767','7230976493','for band');
 
 /*create a table called Event Manager with an event manager id (auto-increment primary key), and their name*/
 
@@ -68,7 +69,8 @@ foreign key (AgentId) references Agent(AgentId));
 
 INSERT INTO Band (BandName, RatePerEvent, Notes, CellNum, AgentId) VALUES
 ('DNCE',200.00, 'Joe Jonas ayyyy','8653479283', 3),
-('Queen',3000.00, 'rest in peace','1118675309', 5);
+('Queen',3000.00, 'rest in peace','1118675309', 5),
+('BTS',2000.00, 'Top kpop boy group around these here parts','7653840926', 6);
 
 /*create a table called Artist with an artist id (auto-increment primary key), first name, middle initial, last name, gender, address, contact info, 
 concert rate per event, agent foreign key */
@@ -126,25 +128,6 @@ the date, start-time, status (created, approved, advertised, sold out (reached m
 seating capacity, special notes, event manager, event manager ID foreign key, and artist/band id (which is a foreign key into the owner table), 
 and vendor foreign key.*/
 
-/*CREATE TABLE Event
-(EventId int auto_increment PRIMARY KEY,
-Street CHAR(50),
-City CHAR(20),
-State CHAR(2),
-Date DATE,
-StartTime TIME,
-Status CHAR(10),
-SeatingCapacity int,
-Notes TEXT,
-BandId int,
-ArtistId int,
-EventManagerId int,
-VendorId int,
-foreign key (BandId) references Band(BandId),
-foreign key (ArtistId) references Artist(ArtistId),
-foreign key (EventManagerId) references EventManager(EventManagerId),
-foreign key (VendorId) references Vendor(VendorId));*/
-
 CREATE TABLE Event
 (EventId int auto_increment PRIMARY KEY,
 EventName CHAR(50),
@@ -169,19 +152,10 @@ foreign key (VendorId) references Vendor(VendorId));
 
 /*put at least 5 records in this table, with at least two pets owned by the same owner*/
 
-/*INSERT INTO Event (Street,City,State,Date,StartTime,Status,SeatingCapacity,Notes,BandId,ArtistId,EventManagerId,VendorId) VALUES
-('123 N Who Lane','Madison','WI','2019-12-15','12:00:00','created',50,'House Cafe',1,1,1,1),
-('231 N Pole Court','North Pole','AK','2018-12-15','20:30:00','sold out',250,'Holiday House Party',2,2,2,2),
-('5398 W Something Else Drive','New York','NY','2019-04-09','06:45:00','created',20,'Intimate Early Risers tea party',2,3,3,3);*/
-
-/*INSERT INTO Event (EventName,Street,City,State,Zip,Date,StartTime,Status,SeatingCapacity,Notes,Singer,EventManagerId,VendorId) VALUES
-('Cake by the House Cafe','123 N Who Lane','Madison','WI','60115','2019-12-15','12:00:00','created',50,'House Cafe','DNCE',1,1),
-('Ho Ho Hooville','231 N Pole Court','North Pole','AK','90667','2018-12-15','20:30:00','sold out',250,'Holiday House Party','Ariana Grande',2,2),
-('Classy Babes Only','5398 W Something Else Drive','New York','NY','72713','2019-04-09','06:45:00','created',20,'Intimate Early Risers tea party','Queen',3,3);*/
-
 INSERT INTO Event (EventName,Street,City,State,Zip,Date,StartTime,Status,SeatingCapacity,Notes,NumTicketsSold,Singer,PerformerType,PerformerId,EventManagerId,VendorId) VALUES
 ('Cake by the House Cafe','123 N Who Lane','Madison','WI','60115','2019-12-15','12:00:00','created',50,'House Cafe',0,'DNCE','Band',1,1,1),
 ('Ho Ho Hooville','231 N Pole Court','North Pole','AK','90667','2018-12-15','20:30:00','sold out',250,'Holiday House Party',250,'Ariana Grande','Artist',4,2,2),
-('Classy Babes Only','5398 W Something Else Drive','New York','NY','72713','2019-04-09','06:45:00','created',20,'Intimate Early Risers tea party',3,'Queen','Band',2,3,3);
+('Classy Babes Only','5398 W Something Else Drive','New York','NY','72713','2019-04-09','06:45:00','created',20,'Intimate Early Risers tea party',3,'Queen','Band',2,3,3),
+('That Boy','7765 E Oof Street','New York','NY','72713','2019-12-26','20:00:00','created',2000,'The boys are back in town',1349,'BTS','Band',3,3,3);
 
 

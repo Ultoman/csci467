@@ -93,7 +93,8 @@ foreign key (AgentId) references Agent(AgentId));
 INSERT INTO Artist (FirstName, MiddleInit, LastName, Gender, Street, City, State, Zip, Email, CellNum, RatePerEvent, AgentId) VALUES
 ('Cherilyn','','Sarkisian','F','123 N Hollywood Blvd','Hollywood', 'CA','90046','cher@gmail.com','6785849485',2000.00, 1),
 ('Beyoncé','Giselle','Knowles-Carter','F','100 W Hollywood Blvd','Hollywood', 'CA','90046','beyonce@gmail.com','6254739483',9999.99, 2),
-('Ji-yong','','Kwon','M','465 E Colombus Avenue','New York', 'NY','10025','gdragon@gmail.com','9177084253',6000.00, 4);
+('Ji-yong','','Kwon','M','465 E Colombus Avenue','New York', 'NY','10025','gdragon@gmail.com','9177084253',6000.00, 4),
+('Ariana','','Grande','F','123 W Colorodo Drive','Colorodo', 'CO','23425','arigrande@gmail.com','2349084626',9090.00, 3);
 
 /*create a table called Vendor with a vendor id (auto-increment primary key), business name, address, 
 a vendor type (concert hall, equipment, setup, lighting, sound, cleanup, security, foods, operating, advertisement, and others), representative name,
@@ -155,7 +156,9 @@ StartTime TIME,
 Status CHAR(10),
 SeatingCapacity int,
 Notes TEXT,
-Singer CHAR(51),
+Singer CHAR(53),
+PerformerType CHAR(6),
+PerformerId int,
 EventManagerId int,
 VendorId int,
 foreign key (EventManagerId) references EventManager(EventManagerId),
@@ -169,9 +172,14 @@ foreign key (VendorId) references Vendor(VendorId));
 ('231 N Pole Court','North Pole','AK','2018-12-15','20:30:00','sold out',250,'Holiday House Party',2,2,2,2),
 ('5398 W Something Else Drive','New York','NY','2019-04-09','06:45:00','created',20,'Intimate Early Risers tea party',2,3,3,3);*/
 
-INSERT INTO Event (EventName,Street,City,State,Zip,Date,StartTime,Status,SeatingCapacity,Notes,Singer,EventManagerId,VendorId) VALUES
+/*INSERT INTO Event (EventName,Street,City,State,Zip,Date,StartTime,Status,SeatingCapacity,Notes,Singer,EventManagerId,VendorId) VALUES
 ('Cake by the House Cafe','123 N Who Lane','Madison','WI','60115','2019-12-15','12:00:00','created',50,'House Cafe','DNCE',1,1),
 ('Ho Ho Hooville','231 N Pole Court','North Pole','AK','90667','2018-12-15','20:30:00','sold out',250,'Holiday House Party','Ariana Grande',2,2),
-('Classy Babes Only','5398 W Something Else Drive','New York','NY','72713','2019-04-09','06:45:00','created',20,'Intimate Early Risers tea party','Queen',3,3);
+('Classy Babes Only','5398 W Something Else Drive','New York','NY','72713','2019-04-09','06:45:00','created',20,'Intimate Early Risers tea party','Queen',3,3);*/
+
+INSERT INTO Event (EventName,Street,City,State,Zip,Date,StartTime,Status,SeatingCapacity,Notes,Singer,PerformerType,PerformerId,EventManagerId,VendorId) VALUES
+('Cake by the House Cafe','123 N Who Lane','Madison','WI','60115','2019-12-15','12:00:00','created',50,'House Cafe','DNCE','Band',1,1,1),
+('Ho Ho Hooville','231 N Pole Court','North Pole','AK','90667','2018-12-15','20:30:00','sold out',250,'Holiday House Party','Ariana Grande','Artist',4,2,2),
+('Classy Babes Only','5398 W Something Else Drive','New York','NY','72713','2019-04-09','06:45:00','created',20,'Intimate Early Risers tea party','Queen','Band',2,3,3);
 
 

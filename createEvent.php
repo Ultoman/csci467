@@ -9,43 +9,6 @@
   include("header.html");
   require_once("conn.php");
 
-/*  echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>';
-8
-  echo '<script>';
-     echo '$(function () {';
-       echo '$('[name="performer"]').click(function (a, b) {';
-           echo '$('#artistOptions option').remove();
-                 var id = a.target.id;
-                 var options = [];
-                 if (id == 'bandChecked' && a.target.checked) {
-                     options = getItems('Band')
-                 }
-                 else if (id == 'artistChecked' && a.target.checked) {
-                     options = getItems('Artist')
-                 }
-                 $('#artistOptions').append(options.join(''));
-                 debugger;
-             });
-         });
-
-         function getItems(choice) {
-             var options = [];
-             if(choice == 'Band'){
-               foreach($conn->query('SELECT BandName FROM Band') as $bandname)
-               {
-                 options.push('<option value="' + $bandname + '"> ' + $bandname + ' </option>');
-               }
-             }
-             else{
-               foreach($conn->query('SELECT ArtistName FROM Artist') as $artistname)
-               {
-                 options.push('<option value="' + $artistname + '"> ' + $artistname + ' </option>');
-               }
-             }
-             return options;
-         }';
-*/
-
   echo '<h1 align="center">'.$pageTitle.'</h1>';
 
   //create form
@@ -95,17 +58,19 @@
 //    echo '<form action="" method="post">';
 //    echo '<input type="radio" name="performer" value="bandChecked" id="band" checked="checked"> Band';
 //    echo '<input type="radio" name="performer" value="artistChecked" id="artist"> Artist';
-    echo '<label for="artistSelect" style="display: block">Singer</label>';
+    echo '<label for="artistSelect" style="display: block">Performer</label>';
 
     echo '<select name="artistSelect" style="display: block; width: 174px; height: 22px">';
-    echo '<option value="empty">-- select a Singer --</option>';
-      foreach($conn->query('SELECT BandName FROM Band') as $bandname)
+    echo '<option value="empty">-- select a Performer --</option>';
+      foreach($conn->query('SELECT BandName,BandId FROM Band') as $bandname)
       {
-       echo '<option value="'.$bandname['BandName'].'">'.$bandname['BandName'].' - BAND</option>';
+//       echo '<option id="band" value="'.$bandname['BandName'].'">'.$bandname['BandName'].' - BAND</option>';
+       echo '<option value="'.$bandname['BandName'].','.$bandname['BandId'].','.'Band">'.$bandname['BandName'].' - BAND</option>';
       }
-      foreach($conn->query('SELECT FirstName,LastName FROM Artist') as $bandname)
+      foreach($conn->query('SELECT FirstName,LastName,ArtistId FROM Artist') as $artistname)
       {
-       echo '<option value="'.$bandname['FirstName'].' '.$bandname['LastName'].'">'.$bandname['FirstName'].' '.$bandname['LastName'].' - ARTIST</option>';
+//       echo '<option value="'.$artistname['FirstName'].' '.$artistname['LastName'].'">'.$artistname['FirstName'].' '.$artistname['LastName'].' - ARTIST</option>';
+       echo '<option value="'.$artistname['FirstName'].' '.$artistname['LastName'].','.$artistname['ArtistId'].','.'Artist">'.$artistname['FirstName'].' '.$artistname['LastName'].' - ARTIST</option>';
       }
     echo '</select>';
    echo '</div>'; // radio/select DIV end
@@ -239,10 +204,17 @@
      echo "<script type='text/javascript'>alert('ERROR: Non numeric found in numeric fields\\n\\nPhone numbers and Zip code must be numbers only');</script>";
     }
     else {
-     $sql = "insert into Event (EventName, Street, City, State, Zip, Date, StartTime, Status, SeatingCapacity, Notes, Singer, EventManagerId, VendorId) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+     $performerParts = explode(',', $singer);
+     //$performerParts[0] = Band/Artist name
+     //$performerParts[1] = Band/Artist ID
+     //$performerParts[2] = "Band" or "Artist"
+
+//     $sql = "insert into Event (EventName, Street, City, State, Zip, Date, StartTime, Status, SeatingCapacity, Notes, Singer, EventManagerId, VendorId) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+     $sql = "insert into Event (EventName, Street, City, State, Zip, Date, StartTime, Status, SeatingCapacity, Notes, Singer, PerformerType, PerformerId, EventManagerId, VendorId) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
      try{
        $stmt = $conn->prepare($sql);
-       $stmt->execute(array($name, $street, $city, $state, $zip, $date, $time, "created", $seatingCap, $notes, $singer, $manager, $vendor));
+//       $stmt->execute(array($name, $street, $city, $state, $zip, $date, $time, "created", $seatingCap, $notes, $singer, $manager, $vendor));
+       $stmt->execute(array($name, $street, $city, $state, $zip, $date, $time, "created", $seatingCap, $notes, $performerParts[0], $performerParts[2], $performerParts[1], $manager, $vendor));
      }
      catch(PDOException $e){
         $message = $e->getMessage();
@@ -271,7 +243,8 @@
 // echo '     vals.push(\'<option value="\' + options[\'BandName\'] + \'"> \' + options[\'BandName\'] + \' </option>\');';
  echo '     vals.push(\'<option value="something">SOMething</option>\');';
 // echo '    }';
- echo '$("#artistOptions").append(vals.join(""));';
+// echo '$("#artistOptions").append(vals.join(""));';
+ echo '$("#artistOptions").append(\'<option value="something">SOMething</option>\');';
  echo '});</script>';
 
  echo '<script type=text/javascript>';

@@ -2,89 +2,97 @@
 
   include("header.html");
   include("conn.php");
-
-  $pageTitle = "Approve Event";
+  include("eventInfo.css");
 
   if (isset($_GET['id'])) {
   $id = $_GET['id'];
 
   $sql = "SELECT EventId,EventName,SeatingCapacity,Notes,BusinessName,FirstName,LastName,Date,StartTime,Status,Singer,Event.Street as Street,Event.City as City,Event.State as State,Event.Zip as Zip FROM Event,EventManager,Vendor WHERE Event.EventManagerId = EventManager.EventManagerId AND Event.VendorId = Vendor.VendorId AND EventId = ".$id;
 
-  echo '<h1 align="center">'.$pageTitle.'</h1>';
 
   foreach($conn->query($sql) as $events)
   {
-  //create form
-  echo '<form action="eventInfo.php" method="post">';
+  echo '<h1 align="center">Approve \''.$events['EventName'].'\' Event</h1>';
+ //create form
+  echo '<form action="approveEvent.php" method="post">';
   // OUTER DIV
-  echo '<div style="display: flex; justify-content: space-around">';
-  // LEFT DIV
-  echo '<div style=" border: 2px solid #333333; width: 40%">';
-   echo '<div style="margin-right:20px; padding-top: 5%; padding-left: 10%">';
-    echo '<label style="float: left; display: block">Event Id :</label>';
-    echo '<input name="eventId" value="'.$events['EventId'].'">';
+  echo '<div align="center">';
+  echo '<div style=" border: 2px solid #333333; width: 80%">'; // INNER DIV
+   echo '<table width="100%">'; //TABLE
+   echo '<div style="float: left; padding: 1em">';
+    echo '<label>Event Id :</label>';
+    echo '<input style="background: #eeeeee; text-align: center" name="eventId" value="'.$events['EventId'].'" size="3" readonly>';
    echo '</div>';
-   echo '<div style="margin-right:20px; padding-left: 10%; padding-top: 10px">';
-    echo '<label style="float: left; display: block">Event Name :</label>';
-    echo $events['EventName'];
-   echo '</div>';
-   echo '<div style="margin-right:20px; padding-left: 10%; padding-top: 10px">';
-    echo '<label style="float: left; display: block">Seating Capacity :</label>';
-    echo $events['SeatingCapacity'];
-   echo '</div>';
-   echo '<div style="margin-right:20px; padding-left: 10%; padding-top: 10px">';
-    echo '<label style="float: left; display: block">Manager:</label>';
-    echo $events['FirstName'].' '.$events['LastName'];
-   echo '</div>';
-   echo '<div style="margin-right:20px; padding-left: 10%; padding-top: 10px">';
-    echo '<label style="float: left; display: block">Vendor:</label>';
-    echo $events['BusinessName'];
-   echo '</div>';
-   echo '<div style="margin-right:20px; padding-left: 10%; padding-top: 10px">';
-    echo '<label style="float: left; display: block">Singer:</label>';
-    echo $events['Singer'];
-   echo '</div>'; // radio/select DIV end
-   echo '<div style="margin-right:20px;  padding-left: 10%; padding-top: 10px">';
-    echo '<label for="notes" style="display: block">Special Notes</label>';
-    echo '<textarea id="notes" name="notes" style="display: block; background: #eeeeee" rows="4" cols="50" readonly>'.$events['Notes'].'</textarea>';
-   echo '</div>';
-  echo '</div>'; // LEFT DIV END
-  // RIGHT DIV
-  echo '<div style=" border: 2px solid #333333; width: 40%">';
-   echo '<div style="margin-right:20px; padding-top: 5%; padding-left: 10%">';
-    echo '<label for="date" style="display: block">Date</label>';
-    echo $events['Date'];
-   echo '</div>';
-   echo '<div style="margin-right:20px; padding-top: 5%">';
-    echo '<label for="time" style="display: block">Time</label>';
-    echo $events['StartTime'];
-   echo '</div>';
-   echo '<div style="float: left; margin-right:20px; padding-left: 10%; padding-top: 10px">';
-    echo '<label for="street" style="display: block">Street</label>';
-    echo $events['Street'];
-   echo '</div>';
-   echo '<div style="margin-right:20px; padding-top: 10px">';
-    echo '<label for="city" style="display: block">City</label>';
-    echo $events['City'];
-   echo '</div>';
-   echo '<div style="float: left; margin-right:20px; padding-left: 10%">';
-   echo '<label for="state" style="display: block">State</label>';
-   echo $events['State'];
-  echo '</div>';
-  echo '<div style="margin-right:20px;">';
-  echo '<label for="zip" style="display: block">ZIP</label>';
-    echo $events['Zip'];
-  echo '</div>';
-  echo '</div>'; // RIGHT DIV END
-  echo '</div>'; // OUTER DIV END
+   echo '<tr>'; // ROW 1
+   echo '<td align="right" width="25%">'; // COL 1 HEADER
+    echo '<label>Seating Capacity :</label>';
+   echo '</td>';
+   echo '<td align="left" width="25%">'; // COL 1 TEXT
+    echo '<label>'.$events['SeatingCapacity'].'</label>';
+   echo '</td>';
+   echo '<td align="right" width="25%">'; // COL 2 HEADER
+    echo '<label>Manager :</label>';
+   echo '</td>';
+   echo '<td align="left" width="25%">'; // COL 2 TEXT
+    echo '<label>'.$events['FirstName']." ".$events['LastName'].'</label>';
+   echo '</td>';
+   echo '</tr>'; // END ROW 1
+
+   echo '<tr>'; // ROW 2
+   echo '<td align="right" width="25%">';
+    echo '<label>Vendor :</label>';
+   echo '</td>';
+   echo '<td align="left" width="25%">';
+    echo '<label>'.$events['BusinessName'].'</label>';
+   echo '</td>';
+   echo '<td align="right" width="25%">';
+    echo '<label>Singer :</label>';
+   echo '</td>';
+   echo '<td align="left" width="25%">';
+    echo '<label>'.$events['Singer'].'</label>';
+   echo '</td>';
+   echo '</tr>'; // END ROW 2
+
+   echo '<tr>';  // ROW 3
+   echo '<td align="right" width="25%">';
+    echo '<label>Date :</label>';
+   echo '</td>';
+   echo '<td align="left" width="25%">';
+    echo '<label>'.$events['Date'].'</label>';
+   echo '</td>';
+   echo '<td align="right" width="25%">';
+    echo '<label>Time :</label>';
+   echo '</td>';
+   echo '<td align="left" width="25%">';
+    echo '<label>'.$events['StartTime'].'</label>';
+   echo '</td>';
+   echo '</tr>'; // END ROW 3
+
+   echo '<tr>';  // ROW 4
+   echo '<td align="right" width="25%">';
+    echo '<label>Address :</label>';
+   echo '</td>';
+   echo '<td align="left" width="25%">';
+    echo '<label>'.$events['Street'].', '.$events['City'].', '.$events['State'].', '.$events['Zip'].'</label>';
+   echo '</td>';
+   echo '<td align="right" width="25%">';
+    echo '<label>Special Notes :</label>';
+   echo '</td>';
+   echo '<td align="left" width="25%">';
+    echo '<label>'.$events['Notes'].'</label>';
+   echo '</td>';
+   echo '</tr>'; // END ROW 4
+  echo '</table>'; // END TABLE
+  echo '</div>'; // INNER DIV
   echo '<div style="padding: 2em;" align="center">';
     echo '<button type="reset" class="button button1" style="margin: 0 2em">Clear</button>';
     echo '<button type="submit" class="button button1" style="margin: 0 2em">Approve</button>';
   echo '</div>';
+  echo '</div>'; // OUTER DIV
   echo '</form>';
-  }
-  }
-
+  } //FOREACH
+  } //END IF
+/*
 if ($_SERVER['REQUEST_METHOD'] == "POST")
   {
     $id = $_POST['eventId'];
@@ -100,5 +108,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST")
      $msg = addslashes("Event '$id' was approved");
      echo "<script type='text/javascript'>alert('$msg');</script>";
   }
-
+*/
 ?>

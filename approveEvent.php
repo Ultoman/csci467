@@ -53,7 +53,7 @@
   echo '</div>';
 
 
-
+/*
  if ($_SERVER['REQUEST_METHOD'] == 'POST')
   { /*
     $busname = $_POST['businessName'];
@@ -87,8 +87,24 @@
 
      $msg = addslashes("$busname was added");
      echo "<script type='text/javascript'>alert('$msg');</script>";
-    }*/
+    }
 
+  }
+*/
+
+if ($_SERVER['REQUEST_METHOD'] == "POST")
+  {
+    $id = $_POST['eventId'];
+     $sql = "UPDATE Event SET Status = 'approved' WHERE EventId = ".$id;
+     try{
+       $conn->query($sql);
+     }
+     catch(PDOException $e){
+        $message = $e->getMessage();
+        echo "<script type='text/javascript'>alert('$message');</script>";
+     }
+     $msg = addslashes("Event '$id' was approved");
+     echo "<script type='text/javascript'>alert('$msg');</script>";
   }
 
 

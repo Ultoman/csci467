@@ -44,7 +44,8 @@
   echo '</tr>';
  echo '</table>';
  echo '</div>'; // End of Agent Info div
-    // Address DIV
+
+ // Address DIV
  echo '<div style="border: 2px solid #333333; width: 30%">';
  echo '<table class="input-table">';
   // Header

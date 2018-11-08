@@ -1,6 +1,4 @@
 <?php
-//Jackie Salim
-//This allows the user to add an Owner
 
   $pageTitle = "Choose an Event to Approve";
   include("main.css");

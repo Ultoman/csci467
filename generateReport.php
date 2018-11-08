@@ -1,6 +1,4 @@
 <?php
-//Jackie Salim
-//This allows the user to add an Owner
 
   $pageTitle = "Generate Event Detail Report";
   include("main.css");
@@ -45,45 +43,6 @@
   echo '</div>';
 
   echo '<br><br>';
-
- if ($_SERVER['REQUEST_METHOD'] == 'POST')
-  { /*
-    $busname = $_POST['businessName'];
-    $firstname = $_POST['repFirstName'];
-    $lastname = $_POST['repLastName'];
-    $street = $_POST['street'];
-    $city = $_POST['city'];
-    $state = $_POST['state'];
-    $zip = $_POST['zip'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $vendorType = $_POST['vendorType'];
-
-    if (empty($busname) || empty($firstname) || empty($lastname) || empty($street) || empty($city) || empty($state)|| empty($zip)|| empty($email)|| empty($phone)) {
-     $border = "style=\"border: 1px red solid; border-radius: 4px\"";
-     echo "<script type='text/javascript'>alert('ERROR: All Fields Required\\n\\nPlease fill out all fields');</script>";
-    }
-    else if (!is_numeric($zip) || !is_numeric($phone)){
-     echo "<script type='text/javascript'>alert('ERROR: Non numeric found in numeric fields\\n\\nPhone numbers and Zip code must be numbers only');</script>";
-    }
-    else {
-     $sql = "insert into Vendor (BusinessName, Street, City, State, Zip, Type, RepFirstName, RepLastName, RepEmail, RepCellNum) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-     try{
-       $stmt = $conn->prepare($sql);
-       $stmt->execute(array($busname, $street, $city, $state, $zip, $vendorType, $firstname, $lastname, $email, $phone));
-     }
-     catch(PDOException $e){
-        $message = $e->getMessage();
-        echo "<script type='text/javascript'>alert('$message');</script>";
-     }
-
-     $msg = addslashes("$busname was added");
-     echo "<script type='text/javascript'>alert('$msg');</script>";
-    }*/
-    if ($_POST['foo'] == 'cancel')
-    {    }
-  }
-
 
   include("footer.html");
 ?>

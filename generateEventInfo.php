@@ -122,7 +122,6 @@
   echo '</div>'; // INNER DIV
 
   echo '<div style="padding: 2em;"  align="center">';
-//    echo '<a href="generateReport.php"><button class="button button1" style="margin: 0 1em">Cancel</button></a>';
     echo '<button class="button button1" style="margin: 0 2em" onClick="history.back()" name="foo" value="cancel">Cancel</button>';
     echo '<button type="submit" onClick="window.print()" class="button button1" style="margin: 0 3em" name="foo" value="submit">Print</button>';
   echo '</div>';
@@ -130,23 +129,7 @@
   echo '</div>'; // OUTER DIV
   echo '</form>';
   } //FOREACH
-  } //END IF
-/*
-if ($_SERVER['REQUEST_METHOD'] == "POST")
-  {
-    $id = $_POST['eventId'];
-    echo $id;
-     $sql = "UPDATE Event SET Status = 'approved' WHERE EventId = ".$id;
-     try{
-       $conn->query($sql);
-     }
-     catch(PDOException $e){
-        $message = $e->getMessage();
-        echo "<script type='text/javascript'>alert('$message');</script>";
-     }
-     $msg = addslashes("Event '$id' was approved");
-     echo "<script type='text/javascript'>alert('$msg');</script>";
-  }
-*/
+ } //END IF
+
  include('footer.html');
 ?>

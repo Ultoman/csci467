@@ -49,7 +49,7 @@
     echo '</select>';
    echo '</div>';
 
-   // BAND or ARTIST radio button and select
+   // BAND or ARTIST select
    echo '<div style="float: left; margin-right:20px; padding-left: 10px">';
     echo '<label for="artistSelect" style="display: block">Performer<span style="color: red">*</span></label>';
 
@@ -64,7 +64,7 @@
        echo '<option value="'.$artistname['FirstName'].' '.$artistname['LastName'].','.$artistname['ArtistId'].','.'Artist">'.$artistname['FirstName'].' '.$artistname['LastName'].' - ARTIST</option>';
       }
     echo '</select>';
-   echo '</div>'; // radio/select DIV end
+   echo '</div>'; // select DIV end
 
    echo '<div style="float:left; padding-top: 10px; padding-left: 10%; padding-bottom: 5%">';
     echo '<label for="notes" style="display: block">Special Notes</label>';

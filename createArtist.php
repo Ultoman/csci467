@@ -141,7 +141,7 @@
     echo '<td align="left" width="50%">';
     echo '<input required type="text" name="email" placeholder="example@email.com" maxLength="30"><br><br>';
     echo '<input required type="text" name="cellPhone" placeholder="8151231000" maxLength="10"><br><br>';
-    echo '<input required id="concertRate" type="number" step="0.01" min="0" value="" name="concertRate" style="display: block; width: 120px"><br>';
+    echo '<input required id="concertRate" type="number" step="0.01" min="0" value="" name="concertRate" style="display: block; width: 174px"><br>';
     echo '<select required name="agent" style="display: block; width: 174px; height: 22px">';
     echo '<option value="" disabled selected>-- select an Agent --</option>';
     foreach($conn->query('SELECT AgentId,FirstName,LastName,Type FROM Agent where Type = \'for artist\'') as $agents)

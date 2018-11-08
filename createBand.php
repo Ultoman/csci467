@@ -37,7 +37,7 @@
     echo '<input type="text" name="othermember3"  maxLength="41"><br><br>';
     echo '<input type="text" name="othermember4"  maxLength="41"><br><br>';
     echo '<input type="text" name="othermember5"  maxLength="41">';
-    echo '<br><br>';
+    echo '<br><br><br>';
     echo '</td>';
   echo '</tr>';
  echo '</table>';
@@ -59,7 +59,7 @@
     echo '</td>';
     // Column 2
     echo '<td align="left" width="50%">';
-    echo '<input required id="concertRate" type="number" step="0.01" min="0" value="" name="concertRate" style="display: block; width: 120px"><br>';
+    echo '<input required id="concertRate" type="number" step="0.01" min="0" value="" name="concertRate" style="display: block; width: 174px"><br>';
     echo '<input required type="text" name="leaderphone" placeholder="8151231000" maxLength="10"><br><br>';
     echo '<select required name="agent" style="width: 174px; height: 22px">';
     echo '<option value="" disabled selected>-- select an Agent --</option>';
@@ -68,13 +68,12 @@
     echo '<option value="' .$agents['AgentId']. '">'.$agents['FirstName']." ".$agents['LastName'].'</option>';
     }
     echo '</select><br><br>';
-//    echo '<textarea id="notes" name="notes" rows="4" cols="45"></textarea>';
     echo '</td>';
   echo '</tr>';
   echo '<tr>';
    echo '<td colspan="2" align="center">';
     echo '<label for="notes" style="display: block">Special Notes</label>';
-    echo '<textarea id="notes" name="notes" style="display: block" rows="4" cols="50"></textarea>';
+    echo '<textarea id="notes" name="notes" style="display: block" rows="6" cols="50"></textarea>';
    echo '</td>';
   echo '</tr>';
   echo '</table>';

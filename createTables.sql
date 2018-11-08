@@ -62,15 +62,22 @@ BandName CHAR(20),
 RatePerEvent double,
 Notes TEXT,
 CellNum CHAR(10),
+Leader CHAR(41),
+Member1 CHAR(41),
+Member2 CHAR(41),
+Member3 CHAR(41),
+Member4 CHAR(41),
+Member5 CHAR(41),
+MemberCount int,
 AgentId int,
 foreign key (AgentId) references Agent(AgentId));
 
 /*put at least 5 records in this table, with at least two pets owned by the same owner*/
 
-INSERT INTO Band (BandName, RatePerEvent, Notes, CellNum, AgentId) VALUES
-('DNCE',200.00, 'Joe Jonas ayyyy','8653479283', 3),
-('Queen',3000.00, 'rest in peace','1118675309', 5),
-('BTS',2000.00, 'Top kpop boy group around these here parts','7653840926', 6);
+INSERT INTO Band (BandName, RatePerEvent, Notes, CellNum, Leader, Member1, Member2, Member3, Member4, Member5, MemberCount, AgentId) VALUES
+('DNCE',200.00, 'Joe Jonas ayyyy','8653479283','Joe Jonas','Jack Lawless','Cole Whittle','JinJoo Lee','','', 5, 3),
+('Queen',3000.00, 'rest in peace','1118675309','Freddie Mercury','Brian May','Roger Taylor','John Deacon','','', 5, 5),
+('Day6',2000.00, 'One of the top kpop boy bands around these here parts','7653840926','Sungjin','Jae','Young K','Wonpil','Dowoon','', 6, 6);
 
 /*create a table called Artist with an artist id (auto-increment primary key), first name, middle initial, last name, gender, address, contact info, 
 concert rate per event, agent foreign key */

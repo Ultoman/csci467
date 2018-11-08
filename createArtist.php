@@ -1,6 +1,6 @@
 <?php
 
-  $pageTitle = "Create New Agent";
+  $pageTitle = "Create New Artist";
   $border = "style=\"border: 1px grey solid; border-radius: 4px\"";
   include("header.html");
   include("main.css");
@@ -8,7 +8,7 @@
 
  echo '<h1 align="center">'.$pageTitle.'</h1>';
 
- echo '<form action="createAgent.php" method="post">';
+ echo '<form action="createArtist.php" method="post">';
 
  // OUTER DIV
  echo '<div style="display: flex; justify-content: space-around">';
@@ -17,34 +17,35 @@
  echo '<div style="border: 2px solid #333333; width: 30%">';
  echo '<table class="input-table">';
   // Header
-    echo '<h1 align="center">Agent Info</h1>';
+    echo '<h1 align="center">Artist Info</h1>';
   // Row 1
   echo '<tr>';
     // Column 1
     echo '<td align="right" width="50%">';
-    echo 'Agent Type<span style="color: red">*</span> :<br><br>';
     echo 'First Name<span style="color: red">*</span> :<br><br>';
-    echo 'Middle Initial<span style="color: red">*</span> :<br><br>';
-    echo 'Last Name<span style="color: red">*</span> :';
+    echo 'Middle Initial :<br><br>';
+    echo 'Last Name<span style="color: red">*</span> :<br><br>';
+    echo 'Gender<span style="color: red">*</span> :';
     echo '</td>';
     // Column 2
     echo '<td align="left" width="50%">';
     echo '<br>';
-    echo '<select required name="agentType" style="width: 174px">';
-    echo '<option value="" disabled selected>-- select an Agent Type --</option>';
-    echo '<option value="For Artist">For Artist</option>';
-    echo '<option value="For Band">For Band</option>';
-    echo '<option value="Other">Other</option>';
-    echo '</select><br><br>';
     echo '<input required type="text" name="fname" placeholder="Jane" maxLength="25"><br><br>';
-    echo '<input required type="text" name="minit" placeholder="G" maxLength="1"><br><br>';
+    echo '<input type="text" name="minit" placeholder="G" maxLength="1"><br><br>';
     echo '<input required type="text" name="lname" placeholder="Doe" maxLength="25">';
     echo '<br><br>';
+    echo '<select required name="gender" style="width: 174px">';
+    echo '<option value="" disabled selected>-- select a Gender --</option>';
+    echo '<option value="M">Male</option>';
+    echo '<option value="F">Female</option>';
+    echo '<option value="O">Other</option>';
+    echo '</select><br><br>';
     echo '</td>';
   echo '</tr>';
  echo '</table>';
- echo '</div>'; // End of Agent Info div
-    // Address DIV
+ echo '</div>'; // End of Artist Info div
+
+ // Address DIV
  echo '<div style="border: 2px solid #333333; width: 30%">';
  echo '<table class="input-table">';
   // Header
@@ -133,13 +134,21 @@
     echo '<td align="right" width="50%">';
     echo 'Email<span style="color: red">*</span> :<br><br>';
     echo 'Cell Phone<span style="color: red">*</span> :<br><br>';
-    echo 'Office Phone<span style="color: red">*</span> :';
+    echo 'Concert Rate per Event<span style="color: red">*</span> :<br><br>';
+    echo 'Agent<span style="color: red">*</span> :';
     echo '</td>';
     // Column 2
     echo '<td align="left" width="50%">';
     echo '<input required type="text" name="email" placeholder="example@email.com" maxLength="30"><br><br>';
     echo '<input required type="text" name="cellPhone" placeholder="8151231000" maxLength="10"><br><br>';
-    echo '<input required type="text" name="officePhone" placeholder="8151231000"  maxLength="10">';
+    echo '<input required id="concertRate" type="number" step="0.01" min="0" value="" name="concertRate" style="display: block; width: 120px"><br>';
+    echo '<select required name="agent" style="display: block; width: 174px; height: 22px">';
+    echo '<option value="" disabled selected>-- select an Agent --</option>';
+    foreach($conn->query('SELECT AgentId,FirstName,LastName,Type FROM Agent where Type = \'for artist\'') as $agents)
+    {
+    echo '<option value="' .$agents['AgentId']. '">'.$agents['FirstName']." ".$agents['LastName'].'</option>';
+    }
+    echo '</select>';
     echo '</td>';
   echo '</tr>';
   echo '</table>';
@@ -160,43 +169,43 @@
     $firstname = $_POST['fname'];
     $middle = $_POST['minit'];
     $lastname = $_POST['lname'];
+    $gender = $_POST['gender'];
     $street = $_POST['street'];
     $city = $_POST['city'];
     $state = $_POST['state'];
     $zip = $_POST['zip'];
     $email = $_POST['email'];
     $cellPhone = $_POST['cellPhone'];
-    $officePhone = $_POST['officePhone'];
-    $agentType = $_POST['agentType'];
+    $rateperevent = $_POST['concertRate'];
+    $agent = $_POST['agent'];
 
     $zzip = str_replace(' ', '', $zip);
     $ffirst = str_replace(' ', '', $firstname);
     $llast = str_replace(' ', '', $lastname);
     $ccity = str_replace(' ', '', $city);
 
-    if (empty($firstname) || empty($middle) || empty($lastname) || empty($street) || empty($city) || empty($state)|| empty($zip)|| empty($email)|| empty($officePhone)|| empty($cellPhone)) {
-     $border = "style=\"border: 1px red solid; border-radius: 4px\"";
+    if (empty($firstname) || empty($lastname) || empty($street) || empty($city) || empty($state)|| empty($zip)|| empty($email)|| empty($cellPhone)) {
      echo "<script type='text/javascript'>alert('ERROR: All Fields Required\\n\\nPlease fill out all fields');</script>";
     }
-    else if (!is_numeric($zzip) || !is_numeric($officePhone) || !is_numeric($cellPhone)){
+    else if (!is_numeric($zzip) || !is_numeric($cellPhone)){
      echo "<script type='text/javascript'>alert('ERROR: Non numeric found in numeric fields\\n\\nPhone numbers and Zip code must be numbers only');</script>";
     }
-    else if (!ctype_alpha($middle) || strpbrk($ffirst, '1234567890') || strpbrk($llast, '1234567890') || strpbrk($ccity, '1234567890')){
-     echo "<script type='text/javascript'>alert('ERROR: Numeric found in non numeric fields\\n\\nNames and City must be alphabetic letters only\\nCity: $city\\nName: $firstname $middle $lastname');</script>";
+    else if ((!ctype_alpha($middle) && !empty($middle)) || strpbrk($ffirst, '1234567890') || strpbrk($llast, '1234567890') || strpbrk($ccity, '1234567890')){
+     echo "<script type='text/javascript'>alert('ERROR: Numeric found in non numeric fields\\n\\nNames and City must be alphabetic letters only\\nCity: $ccity\\nName: $ffirst $middle $llast');</script>";
     }
     else {
      //Not Empty
-     $sql = "insert into Agent (FirstName,MiddleInit,LastName,Street,City,State,Zip,Email,OfficeNum,CellNum,Type) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+     $sql = "insert into Artist (FirstName, MiddleInit, LastName, Gender, Street, City, State, Zip, Email, CellNum, RatePerEvent, AgentId) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
      try{
        $stmt = $conn->prepare($sql);
-       $stmt->execute(array($firstname, $middle, $lastname, $street, $city, $state, $zip, $email, $officePhone, $cellPhone, $agentType));
+       $stmt->execute(array($firstname, $middle, $lastname, $gender, $street, $city, $state, $zip, $email, $cellPhone, $rateperevent, $agent));
      }
      catch(PDOException $e){
         $message = $e->getMessage();
         echo "<script type='text/javascript'>alert('$message');</script>";
      }
 
-     $msg = "$firstname $middle. $lastname was added as Agent";
+     $msg = "$firstname $middle. $lastname was added as Artist";
      echo "<script type='text/javascript'>alert('$msg');</script>";
     }
   }

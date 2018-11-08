@@ -29,7 +29,7 @@
    echo '<div style="margin-right:20px; padding: 10px">';
     echo '<label for="manager" style="display: block">Manager<span style="color: red">*</span></label>';
     echo '<select required name="manager" style="display: block; width: 174px; height: 22px">';
-    echo '<option value="">-- select a manager --</option>';
+    echo '<option value="" disabled selected>-- select a Manager --</option>';
     foreach($conn->query('SELECT EventManagerId,FirstName,LastName FROM EventManager') as $managers)
     {
     echo '<option value="' .$managers['EventManagerId']. '">'.$managers['FirstName']." ".$managers['LastName'].'</option>';
@@ -40,7 +40,7 @@
    echo '<div style="float: left; margin-right:20px; padding-left: 10%">';
     echo '<label for="vendor" style="display: block">Vendor<span style="color: red">*</span></label>';
     echo '<select required name="vendor" style="display: block; width: 174px; height: 22px">';
-    echo '<option value="">-- select a Vendor --</option>';
+    echo '<option value="" disabled selected>-- select a Vendor --</option>';
     //Fill select with vendors - value:VendorId, display:BusinessName
     foreach($conn->query('SELECT VendorId,BusinessName FROM Vendor') as $vendors)
     {
@@ -54,7 +54,7 @@
     echo '<label for="artistSelect" style="display: block">Performer<span style="color: red">*</span></label>';
 
     echo '<select required name="artistSelect" style="display: block; width: 174px; height: 22px">';
-    echo '<option value="">-- select a Performer --</option>';
+    echo '<option value="" disabled selected>-- select a Performer --</option>';
       foreach($conn->query('SELECT BandName,BandId FROM Band') as $bandname)
       {
        echo '<option value="'.$bandname['BandName'].','.$bandname['BandId'].','.'Band">'.$bandname['BandName'].' - BAND</option>';

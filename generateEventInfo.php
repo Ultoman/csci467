@@ -124,7 +124,7 @@
   echo '<div style="padding: 2em;"  align="center">';
 //    echo '<a href="generateReport.php"><button class="button button1" style="margin: 0 1em">Cancel</button></a>';
     echo '<button class="button button1" style="margin: 0 2em" onClick="history.back()" name="foo" value="cancel">Cancel</button>';
-    echo '<button type="submit" onClick="window.print()" class="button button1" style="margin: 0 3em">Print</button>';
+    echo '<button type="submit" onClick="window.print()" class="button button1" style="margin: 0 3em" name="foo" value="submit">Print</button>';
   echo '</div>';
 
   echo '</div>'; // OUTER DIV
